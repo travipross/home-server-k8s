@@ -4,11 +4,10 @@ metadata:
   name: home-assistant-service
   namespace: iot
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: home-assistant
   ports:
     - name: http
       port: 8123
       targetPort: 8123
-      nodePort: 30090
