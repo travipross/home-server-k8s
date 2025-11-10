@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: home-assistant-deployment
+  namespace: iot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: home-assistant
+  template:
+    metadata:
+      labels:
+        app: home-assistant
+    spec:
+      nodeSelector:
+        storage-type: hostpath
+        network-type: host
+      hostNetwork: true
+      containers: 
+        - name: home-assistant
+          image: ghcr.io/home-assistant/home-assistant:2025.11.0
+          ports:
+            - containerPort: 8123
+          volumeMounts:
+            - name: ha-config-storage
+              mountPath: /config
+      volumes:
+        - name: ha-config-storage
+          persistentVolumeClaim:
+            claimName: ha-config-pvc
