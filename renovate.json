@@ -5,5 +5,7 @@
   ],
   "kubernetes": {
     "managerFilePatterns": ["/clusters/.+\\.yaml$/"]
-  }
+  },
+  "assignees": ["travipross"],
+  "reviewers": ["travipross"]
 }
