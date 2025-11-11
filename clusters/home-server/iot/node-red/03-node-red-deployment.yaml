@@ -22,7 +22,7 @@ spec:
         storage-type: hostpath
       containers:
       - name: node-red
-        image: nodered/node-red:4.1.0
+        image: nodered/node-red:4.1.1
         ports:
         - containerPort: 1880
         volumeMounts:
