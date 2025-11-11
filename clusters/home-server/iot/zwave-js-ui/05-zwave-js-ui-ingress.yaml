@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: zwave-js-ui-ingress
+  namespace: iot
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: zwave.home-server-k3s.lan
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: zwave-js-ui-service
+            port: 
+              name: http

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: zwave-js-ui-config-pv
+  labels:
+    app: zwave-js-ui
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 1Gi
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual-hostpath-zwave-js-ui
+  hostPath:
+    path: "/home/travipross/pvc-data/zwave-js-ui/config"
+    type: DirectoryOrCreate
