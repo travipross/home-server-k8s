@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mosquitto-ingress
+  namespace: iot
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: mosquitto.home-server-k3s.lan
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: mosquitto-service
+            port: 
+              number: 1883
+
