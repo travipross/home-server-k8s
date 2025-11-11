@@ -28,9 +28,9 @@ spec:
           ports:
             - containerPort: 8123
           volumeMounts:
-            - name: ha-config-storage
+            - name: home-assistant-config-storage
               mountPath: /config
       volumes:
-        - name: ha-config-storage
+        - name: home-assistant-config-storage
           persistentVolumeClaim:
-            claimName: ha-config-pvc
+            claimName: home-assistant-config-pvc

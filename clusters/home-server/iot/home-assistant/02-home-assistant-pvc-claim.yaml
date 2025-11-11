@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ha-config-pvc
+  name: home-assistant-config-pvc
   namespace: iot
   labels:
     app: home-assistant
@@ -11,4 +11,4 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: manual-hostpath-ha
+  storageClassName: manual-hostpath-home-assistant

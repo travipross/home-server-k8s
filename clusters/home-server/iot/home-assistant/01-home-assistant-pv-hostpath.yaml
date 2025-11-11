@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ha-config-pv
+  name: home-assistant-config-pv
   labels:
     app: home-assistant
 spec:
@@ -10,7 +10,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: manual-hostpath-ha
+  storageClassName: manual-hostpath-home-assistant
   hostPath:
     path: "/home/travipross/pvc-data/home-assistant/config"
     type: DirectoryOrCreate
