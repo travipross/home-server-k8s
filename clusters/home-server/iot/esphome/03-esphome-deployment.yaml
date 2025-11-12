@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: esphome-deployment
+  namespace: iot
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 0
+  selector:
+    matchLabels:
+      app: esphome
+  template:
+    metadata:
+      labels:
+        app: esphome
+    spec:
+      nodeSelector:
+        storage-type: hostpath
+        network-type: host
+      hostNetwork: true
+      containers:
+        - name: esphome
+          image: ghcr.io/esphome/esphome:2025.9.2
+          ports:
+          - name: http
+            containerPort: 6052
+          volumeMounts:
+            - name: esphome-config-storage
+              mountPath: /config        
+      volumes:
+        - name: esphome-config-storage
+          persistentVolumeClaim:
+            claimName: esphome-config-pvc
