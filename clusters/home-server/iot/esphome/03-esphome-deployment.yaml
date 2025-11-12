@@ -24,7 +24,7 @@ spec:
       hostNetwork: true
       containers:
         - name: esphome
-          image: ghcr.io/esphome/esphome:2025.9.2
+          image: ghcr.io/esphome/esphome:2025.10.5
           ports:
           - name: http
             containerPort: 6052
