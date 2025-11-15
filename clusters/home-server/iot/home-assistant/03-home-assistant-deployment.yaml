@@ -6,10 +6,7 @@ metadata:
 spec:
   replicas: 1
   strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 0
+    type: Recreate
   selector:
     matchLabels:
       app: home-assistant
@@ -24,7 +21,7 @@ spec:
       hostNetwork: true
       containers: 
         - name: home-assistant
-          image: ghcr.io/home-assistant/home-assistant:2025.11.2
+          image: ghcr.io/home-assistant/home-assistant:2025.11.1
           ports:
             - containerPort: 8123
           volumeMounts:
