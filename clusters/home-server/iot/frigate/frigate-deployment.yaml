@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frigate-deployment
+  namespace: iot
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: frigate
+  template:
+    metadata:
+      labels:
+        app: frigate
+    spec:
+      nodeSelector:
+        storage-type: hostpath
+        network-type: host
+      hostNetwork: true
+      containers:
+        - name: frigate
+          image: ghcr.io/blakeblackshear/frigate:0.16.1
+          ports:
+            - name: http-external
+              containerPort: 8971
+            - name: http-internal
+              containerPort: 5000
+            - name: rtsp
+              containerPort: 8554
+            - name: webrtc-tcp
+              containerPort: 8555
+              protocol: TCP
+            - name: webrtc-udp
+              containerPort: 8555
+              protocol: UDP
+          volumeMounts:
+            - name: frigate-config-storage
+              mountPath: /config
+            - name: frigate-media-storage
+              mountPath: /media/frigate
+            - name: frigate-cache
+              mountPath: /tmp/cache
+      volumes:
+        - name: frigate-config-storage
+          persistentVolumeClaim:
+            claimName: frigate-config-pvc
+        - name: frigate-media-storage
+          persistentVolumeClaim:
+            claimName: frigate-media-pvc
+        - name: frigate-cache
+          emptyDir:
+            medium: Memory # tmpfs
+            sizeLimit: 256Mi
