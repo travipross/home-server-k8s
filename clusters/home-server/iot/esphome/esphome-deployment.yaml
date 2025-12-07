@@ -15,6 +15,8 @@ spec:
       labels:
         app: esphome
     spec:
+      securityContext:
+        fsGroup: 1000
       nodeSelector:
         network-type: host
       hostNetwork: true
