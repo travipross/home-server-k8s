@@ -16,19 +16,18 @@ spec:
         app: esphome
     spec:
       nodeSelector:
-        storage-type: hostpath
         network-type: host
       hostNetwork: true
       containers:
         - name: esphome
           image: ghcr.io/esphome/esphome:2025.11.4
           ports:
-          - name: http
-            containerPort: 6052
+            - name: http
+              containerPort: 6052
           volumeMounts:
             - name: esphome-config-storage
-              mountPath: /config        
+              mountPath: /config
       volumes:
         - name: esphome-config-storage
           persistentVolumeClaim:
-            claimName: esphome-config-pvc
+            claimName: esphome-config-longhorn-pvc

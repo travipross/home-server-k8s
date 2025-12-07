@@ -16,7 +16,6 @@ spec:
         app: frigate
     spec:
       nodeSelector:
-        storage-type: hostpath
         network-type: host
       hostNetwork: true
       containers:
@@ -45,10 +44,10 @@ spec:
       volumes:
         - name: frigate-config-storage
           persistentVolumeClaim:
-            claimName: frigate-config-pvc
+            claimName: frigate-config-longhorn-pvc
         - name: frigate-media-storage
           persistentVolumeClaim:
-            claimName: frigate-media-pvc
+            claimName: frigate-media-longhorn-pvc
         - name: frigate-cache
           emptyDir:
             medium: Memory # tmpfs

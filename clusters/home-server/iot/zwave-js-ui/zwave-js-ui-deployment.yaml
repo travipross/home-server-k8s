@@ -16,20 +16,19 @@ spec:
         app: zwave-js-ui
     spec:
       nodeSelector:
-        storage-type: hostpath
         zwave: "true"
       containers:
-      - name: zwave-js-ui
-        image: zwavejs/zwave-js-ui:11.8.2
-        ports:
-        - name: http
-          containerPort: 8091
-        - name: websocket
-          containerPort: 3000
-        volumeMounts:
-          - name: zwave-js-ui-config-storage
-            mountPath: /usr/src/app/store          
+        - name: zwave-js-ui
+          image: zwavejs/zwave-js-ui:11.8.2
+          ports:
+            - name: http
+              containerPort: 8091
+            - name: websocket
+              containerPort: 3000
+          volumeMounts:
+            - name: zwave-js-ui-config-storage
+              mountPath: /usr/src/app/store
       volumes:
         - name: zwave-js-ui-config-storage
           persistentVolumeClaim:
-            claimName: zwave-js-ui-config-pvc
+            claimName: zwave-js-ui-config-longhorn-pvc

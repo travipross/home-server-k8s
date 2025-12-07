@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: esphome-config-pvc
+  name: zwave-js-ui-config-longhorn-pvc
   labels:
-    app: esphome
+    app: zwave-js-ui
   namespace: iot
 spec:
   accessModes:
@@ -11,4 +11,4 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: manual-hostpath-esphome
+  storageClassName: longhorn

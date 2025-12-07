@@ -15,24 +15,22 @@ spec:
       labels:
         app: mosquitto
     spec:
-      nodeSelector:
-        storage-type: hostpath
       containers:
-      - name: mosquitto
-        image: eclipse-mosquitto:2.0.22
-        ports:
-        - containerPort: 1883
-        volumeMounts:
-          - name: mosquitto-data-volume
-            mountPath: /mosquitto/data
-          - name: mosquitto-log-volume
-            mountPath: /mosquitto/log
-          - name: mosquitto-config-volume
-            mountPath: /mosquitto/config
+        - name: mosquitto
+          image: eclipse-mosquitto:2.0.22
+          ports:
+            - containerPort: 1883
+          volumeMounts:
+            - name: mosquitto-data-volume
+              mountPath: /mosquitto/data
+            - name: mosquitto-log-volume
+              mountPath: /mosquitto/log
+            - name: mosquitto-config-volume
+              mountPath: /mosquitto/config
       volumes:
         - name: mosquitto-data-volume
           persistentVolumeClaim:
-            claimName: mosquitto-data-pvc
+            claimName: mosquitto-data-longhorn-pvc
         - name: mosquitto-config-volume
           configMap:
             name: mosquitto-configmap

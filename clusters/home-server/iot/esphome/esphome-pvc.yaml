@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: home-assistant-config-pvc
-  namespace: iot
+  name: esphome-config-longhorn-pvc
   labels:
-    app: home-assistant
+    app: esphome
+  namespace: iot
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
-  storageClassName: manual-hostpath-home-assistant
+  storageClassName: longhorn

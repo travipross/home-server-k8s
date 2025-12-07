@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: frigate-config-pvc
+  name: frigate-config-longhorn-pvc
   namespace: iot
   labels:
     app: frigate
@@ -11,12 +11,12 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: manual-hostpath-frigate-config
+  storageClassName: longhorn
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: frigate-media-pvc
+  name: frigate-media-longhorn-pvc
   namespace: iot
   labels:
     app: frigate
@@ -26,4 +26,4 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: manual-hostpath-frigate-media
+  storageClassName: longhorn

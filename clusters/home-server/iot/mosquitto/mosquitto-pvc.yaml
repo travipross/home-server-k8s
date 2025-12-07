@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: node-red-data-pvc
+  name: mosquitto-data-longhorn-pvc
   namespace: iot
   labels:
-    app: node-red
+    app: mosquitto
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
-  storageClassName: manual-hostpath-node-red
+  storageClassName: longhorn

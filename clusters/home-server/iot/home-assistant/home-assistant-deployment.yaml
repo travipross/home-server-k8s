@@ -16,10 +16,9 @@ spec:
         app: home-assistant
     spec:
       nodeSelector:
-        storage-type: hostpath
         network-type: host
       hostNetwork: true
-      containers: 
+      containers:
         - name: home-assistant
           image: ghcr.io/home-assistant/home-assistant:2025.12.1
           ports:
@@ -30,4 +29,4 @@ spec:
       volumes:
         - name: home-assistant-config-storage
           persistentVolumeClaim:
-            claimName: home-assistant-config-pvc
+            claimName: home-assistant-config-longhorn-pvc

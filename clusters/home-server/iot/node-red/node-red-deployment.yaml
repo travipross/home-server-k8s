@@ -15,17 +15,19 @@ spec:
       labels:
         app: node-red
     spec:
-      nodeSelector:
-        storage-type: hostpath
       containers:
-      - name: node-red
-        image: nodered/node-red:4.1.2
-        ports:
-        - containerPort: 1880
-        volumeMounts:
-          - name: node-red-data-storage
-            mountPath: /data
+        - name: node-red
+          image: nodered/node-red:4.1.2
+          ports:
+            - containerPort: 1880
+          volumeMounts:
+            - name: node-red-data-storage
+              mountPath: /data
+          securityContext:
+            runAsUser: 1000
       volumes:
         - name: node-red-data-storage
           persistentVolumeClaim:
-            claimName: node-red-data-pvc
+            claimName: node-red-data-longhorn-pvc
+      securityContext:
+        fsGroup: 1000
