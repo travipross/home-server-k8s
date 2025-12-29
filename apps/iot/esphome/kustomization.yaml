@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - esphome-deployment.yaml
+  - esphome-ingress.yaml
+  - esphome-pvc.yaml
+  - esphome-service.yaml
