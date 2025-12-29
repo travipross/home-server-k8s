@@ -1,0 +1,84 @@
+image:
+  repository: ghcr.io/blakeblackshear/frigate
+  tag: 0.16.1
+  pullPolicy: IfNotPresent
+strategyType: Recreate
+
+# -- additional ENV variables to set. Prefix with FRIGATE_ to target Frigate configuration values
+env: {}
+  # TZ: UTC
+
+# -- set environment variables from Secret(s)
+envFromSecrets: []
+  # secrets are required before `helm install`
+  # - frigate-rstp-credentials
+
+coral:
+  # -- enables the use of a Coral device
+  enabled: false
+  # -- path on the host to which to mount the Coral device
+  hostPath: /dev/bus/usb
+
+# Add the Intel GPU device pass-through (have to use volume mount because chart doesn't support `devices`)
+extraVolumes:
+  - name: dev-dri
+    hostPath:
+      path: /dev/dri
+extraVolumeMounts:
+  - name: dev-dri
+    mountPath: /dev/dri
+    readOnly: false
+
+# SHM is used for raw video frames. 1Gi is safe for ~4-5 high-res cameras.
+shmSize: 1Gi
+
+# tmpfs is used for recording segments before they go to Longhorn.
+tmpfs:
+  enabled: true
+  sizeLimit: 1Gi
+
+# Overridden with configMap contents via HelmRelease.spec.valuesFrom
+config: {}
+
+service:
+  type: ClusterIP
+  port: 5000
+
+ingress:
+  enabled: true
+  ingressClassName: traefik
+  hosts:
+    - host: frigate.home-server-k3s.lan
+      paths:
+        - path: "/"
+          # portName: http-auth
+          portName: http
+
+persistence:
+  # use init container to copy config from configMap over to PVC at startup
+  config:
+    enabled: true
+    existingClaim: frigate-config-longhorn-pvc
+    accessMode: ReadWriteOnce
+    size: 1Gi
+    skipuninstall: true # Requires manual deletion of PVC if desired
+    ephemeralWritableConfigYaml: true # so that migrations can be run and UI editor can be used
+
+  media:
+    enabled: false # temporarily disabled, but should probably be mapped to NFS volume instead of longhorn; need to test
+    existingClaim: frigate-media-longhorn-pvc
+    size: 10Gi
+    skipuninstall: true # Requires manual deletion of PVC if desired
+
+# Resource limits to ensure pod doesn't crash k8s control plane
+resources:
+  limits:
+    cpu: "1200m"
+    memory: "2Gi"
+  requests:
+    cpu: "300m"
+    memory: "1Gi"
+
+# Enable privileged mode so Frigate can talk to the GPU
+securityContext:
+  privileged: true
