@@ -10,5 +10,5 @@ configMapGenerator:
     files:
       - values.yaml # for helm chart
       - config.yaml # application config
-    options:
-      disableNameSuffixHash: true
+configurations:
+  - kustomizeconfig.yaml
