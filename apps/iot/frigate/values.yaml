@@ -58,7 +58,7 @@ persistence:
   # use init container to copy config from configMap over to PVC at startup
   config:
     enabled: true
-    existingClaim: frigate-config-longhorn-pvc
+    existingClaim: frigate-config
     accessMode: ReadWriteOnce
     size: 1Gi
     skipuninstall: true # Requires manual deletion of PVC if desired
@@ -66,7 +66,7 @@ persistence:
 
   media:
     enabled: false # temporarily disabled, but should probably be mapped to NFS volume instead of longhorn; need to test
-    existingClaim: frigate-media-longhorn-pvc
+    existingClaim: frigate-media
     size: 10Gi
     skipuninstall: true # Requires manual deletion of PVC if desired
 

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: esphome-deployment
+  name: esphome
   namespace: iot
 spec:
   replicas: 1
@@ -32,4 +32,4 @@ spec:
       volumes:
         - name: esphome-config-storage
           persistentVolumeClaim:
-            claimName: esphome-config-longhorn-pvc
+            claimName: esphome-config

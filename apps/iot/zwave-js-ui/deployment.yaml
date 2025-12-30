@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: zwave-js-ui-deployment
+  name: zwave-js-ui
   namespace: iot
 spec:
   replicas: 1
@@ -33,4 +33,4 @@ spec:
       volumes:
         - name: zwave-js-ui-config-storage
           persistentVolumeClaim:
-            claimName: zwave-js-ui-config-longhorn-pvc
+            claimName: zwave-js-ui-config

@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: node-red-ingress
+  name: node-red
   namespace: iot
 spec:
   ingressClassName: traefik
@@ -13,6 +13,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: node-red-service
+            name: node-red
             port: 
               number: 1880

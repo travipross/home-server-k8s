@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: zwave-js-ui-config-longhorn-pvc
+  name: zwave-js-ui-config
   labels:
     app: zwave-js-ui
   namespace: iot

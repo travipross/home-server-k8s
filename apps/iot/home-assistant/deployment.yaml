@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: home-assistant-deployment
+  name: home-assistant
   namespace: iot
 spec:
   replicas: 1
@@ -31,4 +31,4 @@ spec:
       volumes:
         - name: home-assistant-config-storage
           persistentVolumeClaim:
-            claimName: home-assistant-config-longhorn-pvc
+            claimName: home-assistant-config

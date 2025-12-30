@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: frigate-media-longhorn-pvc
+  name: frigate-media
   namespace: iot
   labels:
     app: frigate

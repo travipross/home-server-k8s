@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: node-red-data-longhorn-pvc
+  name: node-red-data
   namespace: iot
   labels:
     app: node-red

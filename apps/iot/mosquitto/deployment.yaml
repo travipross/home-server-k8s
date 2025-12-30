@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mosquitto-deployment
+  name: mosquitto
   namespace: iot
 spec:
   replicas: 1
@@ -32,7 +32,7 @@ spec:
       volumes:
         - name: mosquitto-data-volume
           persistentVolumeClaim:
-            claimName: mosquitto-data-longhorn-pvc
+            claimName: mosquitto-data
         - name: mosquitto-config-volume
           configMap:
             name: mosquitto-configmap

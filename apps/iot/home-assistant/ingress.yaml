@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: home-assistant-ingress
+  name: home-assistant
   namespace: iot
 spec:
   ingressClassName: traefik
@@ -13,6 +13,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: home-assistant-service
+            name: home-assistant
             port: 
               number: 8123

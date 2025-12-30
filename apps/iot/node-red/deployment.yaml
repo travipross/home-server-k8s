@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: node-red-deployment
+  name: node-red
   namespace: iot
 spec:
   replicas: 1
@@ -28,6 +28,6 @@ spec:
       volumes:
         - name: node-red-data-storage
           persistentVolumeClaim:
-            claimName: node-red-data-longhorn-pvc
+            claimName: node-red-data
       securityContext:
         fsGroup: 1000

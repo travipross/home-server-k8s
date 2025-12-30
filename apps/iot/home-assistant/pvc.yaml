@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: home-assistant-config-longhorn-pvc
+  name: home-assistant-config
   namespace: iot
   labels:
     app: home-assistant
