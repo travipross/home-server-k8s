@@ -12,7 +12,7 @@ spec:
         kind: HelmRepository
         name: blakeshome
         namespace: flux-system
-  interval: 1h
+  interval: 1m
   # Loading chart values from file to allow for tidier organization
   valuesFrom:
     # Load helm values.yaml from generated configmap (from kustomization.yaml)
