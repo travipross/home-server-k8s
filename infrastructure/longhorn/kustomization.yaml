@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - longhorn-helmrelease.yaml
-  - longhorn-helmrepo.yaml
-  - longhorn-ingress.yaml
-  - longhorn-namespace.yaml
+  - helmrelease.yaml
+  - helmrepo.yaml
+  - ingress.yaml
+  - namespace.yaml
