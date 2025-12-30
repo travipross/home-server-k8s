@@ -4,7 +4,6 @@ metadata:
   name: zwave-js-ui-config
   labels:
     app: zwave-js-ui
-  namespace: iot
 spec:
   accessModes:
     - ReadWriteOnce
