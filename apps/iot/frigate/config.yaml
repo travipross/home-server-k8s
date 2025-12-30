@@ -40,31 +40,30 @@ cameras:
         - path: rtsp://192.168.2.100:8554/garage
           roles:
             - detect
-  # catio:
-  #   ffmpeg:
-  #     inputs:
-  #       - path: rtsp://192.168.2.100:8554/catio_sub
-  #         roles:
-  #           - detect
-  # # Commented out temporarily to prevent CPU over-use
-  # back_yard:
-  #   ffmpeg:
-  #     inputs:
-  #       - path: rtsp://192.168.2.100:8554/back_yard_sub
-  #         roles:
-  #           - detect
-  # cat_ptz:
-  #   ffmpeg:
-  #     inputs:
-  #       - path: rtsp://192.168.2.100:8554/cat_ptz_sub
-  #         roles:
-  #           - detect
-  # living_room:
-  #   ffmpeg:
-  #     inputs:
-  #       - path: rtsp://192.168.2.100:8554/living_room_sub
-  #         roles:
-  #           - detect
+  catio:
+    ffmpeg:
+      inputs:
+        - path: rtsp://192.168.2.100:8554/catio_sub
+          roles:
+            - detect
+  back_yard:
+    ffmpeg:
+      inputs:
+        - path: rtsp://192.168.2.100:8554/back_yard_sub
+          roles:
+            - detect
+  cat_ptz:
+    ffmpeg:
+      inputs:
+        - path: rtsp://192.168.2.100:8554/cat_ptz_sub
+          roles:
+            - detect
+  living_room:
+    ffmpeg:
+      inputs:
+        - path: rtsp://192.168.2.100:8554/living_room_sub
+          roles:
+            - detect
 
 # Disable MQTT until finalized setup
 mqtt:
