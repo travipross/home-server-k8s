@@ -32,12 +32,12 @@ extraVolumeMounts:
     readOnly: false
 
 # SHM is used for raw video frames. 1Gi is safe for ~4-5 high-res cameras.
-shmSize: 1Gi
+shmSize: 1.5Gi
 
 # tmpfs is used for recording segments before they go to Longhorn.
 tmpfs:
   enabled: true
-  sizeLimit: 1Gi
+  sizeLimit: 1.5Gi
 
 # Overridden with configMap contents via HelmRelease.spec.valuesFrom
 config: |
@@ -171,11 +171,11 @@ persistence:
 # Resource limits to ensure pod doesn't crash k8s control plane
 resources:
   limits:
-    cpu: "1200m"
-    memory: "2Gi"
+    cpu: "3200m"
+    memory: "6Gi"
   requests:
-    cpu: "300m"
-    memory: "1Gi"
+    cpu: "500m"
+    memory: "2Gi"
 
 # Enable privileged mode so Frigate can talk to the GPU
 securityContext:
