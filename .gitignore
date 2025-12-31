@@ -1,4 +1,9 @@
 *.key
 *.agekey
 *secret.yaml
+
+# ignore files ending with .sops.yaml extension, as a convention to indicate they contain secrets
 *.sops.yaml
+
+# track the file named .sops.yaml as it is a config file used by sops CLI
+!.sops.yaml
