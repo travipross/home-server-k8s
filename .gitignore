@@ -1,3 +1,4 @@
 *.key
 *.agekey
 *secret.yaml
+*.sops.yaml

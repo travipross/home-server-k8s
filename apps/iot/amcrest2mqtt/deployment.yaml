@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amcrest2mqtt
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: amcrest2mqtt
+  template:
+    metadata:
+      labels:
+        app: amcrest2mqtt
+    spec:
+      containers:
+        - name: amcrest2mqtt
+          image: dchesterton/amcrest2mqtt:1.0.16
+          env:
+            - name: AMCREST_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: camera
+                  key: AMCREST_CAM_RTSP_USERNAME
+                  optional: true
+            - name: AMCREST_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: camera
+                  key: AMCREST_CAM_RTSP_PASSWORD
+            - name: AMCREST_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: camera-configs
+                  key: DOORBELL_CAM_HOST
+            - name: MQTT_HOST
+              value: mosquitto
+            - name: HOME_ASSISTANT
+              value: "true"
+            - name: MQTT_USERNAME
+              value: ""
