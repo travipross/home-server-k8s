@@ -151,6 +151,8 @@ ingress:
         - path: "/"
           # portName: http-auth
           portName: http
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
 
 persistence:
   # use init container to copy config from configMap over to PVC at startup
