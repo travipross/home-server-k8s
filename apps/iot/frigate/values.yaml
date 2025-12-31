@@ -82,7 +82,7 @@ config: |
     garage:
       ffmpeg:
         inputs:
-          - path: rtsp://192.168.2.100:8554/garage
+          - path: rtsp://192.168.2.100:8554/garage_sub
             roles:
               - detect
       motion:
