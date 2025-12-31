@@ -5,9 +5,8 @@ resources:
   - media-pvc.yaml
   - release.yaml
 configMapGenerator:
-  - name: frigate-configmap
+  - name: frigate-chart-values
     files:
       - values.yaml # for helm chart
-      - config.yaml # application config
 configurations:
   - kustomizeconfig.yaml

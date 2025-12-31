@@ -16,10 +16,5 @@ spec:
   valuesFrom:
     # Load helm values.yaml from generated configmap (from kustomization.yaml)
     - kind: ConfigMap
-      name: frigate-configmap
+      name: frigate-chart-values
       valuesKey: "values.yaml"
-    # Override `config` section of values.yaml
-    - kind: ConfigMap
-      name: frigate-configmap
-      valuesKey: "config.yaml"
-      targetPath: config
