@@ -67,7 +67,7 @@ persistence:
     ephemeralWritableConfigYaml: true # so that migrations can be run and UI editor can be used
 
   media:
-    enabled: false # temporarily disabled, but should probably be mapped to NFS volume instead of longhorn; need to test
+    enabled: true
     existingClaim: frigate-media
     size: 10Gi
     skipuninstall: true # Requires manual deletion of PVC if desired
