@@ -5,7 +5,9 @@ image:
 strategyType: Recreate
 
 # -- additional ENV variables to set. Prefix with FRIGATE_ to target Frigate configuration values
-env: {}
+env:
+  FRIGATE_MQTT_USER: ""
+  FRIGATE_MQTT_PASSWORD: ""
   # TZ: UTC
 
 # -- set environment variables from Secret(s)
@@ -58,7 +60,7 @@ persistence:
   # use init container to copy config from configMap over to PVC at startup
   config:
     enabled: true
-    existingClaim: frigate-config
+    existingClaim: frigate-appconfig
     accessMode: ReadWriteOnce
     size: 1Gi
     skipuninstall: true # Requires manual deletion of PVC if desired
