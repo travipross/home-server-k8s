@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - appconfig-pvc.yaml
   - media-pvc.yaml
-  - helmrelease.yaml
+  - release.yaml
 configMapGenerator:
   - name: frigate-configmap
     files:
