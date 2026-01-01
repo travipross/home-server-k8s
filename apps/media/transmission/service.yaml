@@ -4,8 +4,6 @@ metadata:
   name: transmission
 spec:
   type: ClusterIP
-  selector:
-    app: transmission
   ports:
     - name: web-ui
       port: 9091

@@ -6,13 +6,7 @@ spec:
   replicas: 1
   strategy:
     type: Recreate
-  selector:
-    matchLabels:
-      app: sonarr
   template:
-    metadata:
-      labels:
-        app: sonarr
     spec:
       securityContext:
         fsGroup: 1000

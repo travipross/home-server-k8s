@@ -4,8 +4,6 @@ metadata:
   name: radarr
 spec:
   type: ClusterIP
-  selector:
-    app: radarr
   ports:
     - name: web-ui
       port: 9091

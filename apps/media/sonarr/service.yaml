@@ -4,8 +4,6 @@ metadata:
   name: sonarr
 spec:
   type: ClusterIP
-  selector:
-    app: sonarr
   ports:
     - name: web-ui
       port: 9091
