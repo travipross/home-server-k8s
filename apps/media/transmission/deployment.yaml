@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transmission
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: transmission
+  template:
+    metadata:
+      labels:
+        app: transmission
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: transmission
+          image: lscr.io/linuxserver/transmission:4.0.6
+          ports:
+            - containerPort: 9091
+              name: web-ui
+            # These ports would be needed for "active" mode; consider using tailscale instead of router port forwarding
+            # - containerPort: 51413
+            #   protocol: TCP
+            #   name: torrent-tcp
+            # - containerPort: 51413
+            #   name: torrent-udp
+            #   protocol: UDP
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: downloads
+              mountPath: /downloads
+            - name: watch
+              mountPath: /watch
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: transmission-config
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: transmission-downloads
+        - name: watch
+          persistentVolumeClaim:
+            claimName: transmission-watch
