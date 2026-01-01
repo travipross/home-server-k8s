@@ -6,13 +6,7 @@ spec:
   replicas: 1
   strategy:
     type: Recreate
-  selector:
-    matchLabels:
-      app: home-assistant
   template:
-    metadata:
-      labels:
-        app: home-assistant
     spec:
       securityContext:
         fsGroup: 1000

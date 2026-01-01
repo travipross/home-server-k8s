@@ -4,8 +4,6 @@ metadata:
   name: esphome
 spec:
   type: ClusterIP
-  selector:
-    app: esphome
   ports:
     - name: http
       protocol: TCP

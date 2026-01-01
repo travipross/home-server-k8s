@@ -6,13 +6,7 @@ spec:
   replicas: 1
   strategy:
     type: Recreate
-  selector:
-    matchLabels:
-      app: amcrest2mqtt
   template:
-    metadata:
-      labels:
-        app: amcrest2mqtt
     spec:
       containers:
         - name: amcrest2mqtt

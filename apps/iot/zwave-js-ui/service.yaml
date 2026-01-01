@@ -4,8 +4,6 @@ metadata:
   name: zwave-js-ui
 spec:
   type: ClusterIP
-  selector:
-    app: zwave-js-ui
   ports:
     - name: http
       protocol: TCP

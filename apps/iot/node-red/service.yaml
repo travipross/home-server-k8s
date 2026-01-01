@@ -4,8 +4,6 @@ metadata:
   name: node-red
 spec:
   type: ClusterIP
-  selector:
-    app: node-red
   ports:
     - name: http
       port: 1880

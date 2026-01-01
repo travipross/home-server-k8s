@@ -141,6 +141,8 @@ config: |
 service:
   type: ClusterIP
   port: 5000
+  labels:
+    app: frigate
 
 ingress:
   enabled: true
