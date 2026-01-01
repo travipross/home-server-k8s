@@ -3,4 +3,7 @@ kind: Kustomization
 namespace: media
 resources:
   - namespace.yaml
+  - nas-movies-pv.yaml
+  - nas-movies-pvc.yaml
   - ./transmission/
+  - ./radarr/
