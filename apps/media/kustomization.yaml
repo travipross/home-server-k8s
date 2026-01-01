@@ -5,5 +5,8 @@ resources:
   - namespace.yaml
   - nas-movies-pv.yaml
   - nas-movies-pvc.yaml
+  - nas-tv-pv.yaml
+  - nas-tv-pvc.yaml
   - ./transmission/
   - ./radarr/
+  - ./sonarr/
