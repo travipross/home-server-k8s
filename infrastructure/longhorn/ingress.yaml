@@ -3,16 +3,32 @@ kind: Ingress
 metadata:
   name: longhorn-ingress
   namespace: longhorn-system
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-cloudflare-cluster-issuer
 spec:
   ingressClassName: traefik
+  tls:
+    - secretName: longhorn-tls-cert
+      hosts:
+        - longhorn.new.travisprosser.com
   rules:
-  - host: longhorn.home-server-k3s.lan
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: longhorn-frontend
-            port: 
-              number: 80
+    - host: longhorn.home-server-k3s.lan
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: longhorn-frontend
+                port:
+                  number: 80
+    - host: longhorn.new.travisprosser.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: longhorn-frontend
+                port:
+                  number: 80

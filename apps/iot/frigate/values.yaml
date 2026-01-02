@@ -147,14 +147,22 @@ service:
 ingress:
   enabled: true
   ingressClassName: traefik
+  tls:
+    - secretName: cluster-issuer-tls-private-key
+      hosts:
+        - frigate.new.travisprosser.com
   hosts:
     - host: frigate.home-server-k3s.lan
       paths:
         - path: "/"
-          # portName: http-auth
-          portName: http
+          portName: http-auth
+    - host: frigate.new.travisprosser.com
+      paths:
+        - path: "/"
+          portName: http-auth
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
+    cert-manager.io/cluster-issuer: letsencrypt-cloudflare-cluster-issuer
 
 persistence:
   # use init container to copy config from configMap over to PVC at startup

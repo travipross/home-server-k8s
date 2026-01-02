@@ -8,7 +8,7 @@ spec:
     server: https://acme-v02.api.letsencrypt.org/directory
     profile: tlsserver
     privateKeySecretRef:
-      name: cluster-issuer-tls-private-key
+      name: letsencrypt-account-key
     solvers:
       - dns01:
           cloudflare:

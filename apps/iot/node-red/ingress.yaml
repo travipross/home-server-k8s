@@ -2,10 +2,26 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: node-red
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-cloudflare-cluster-issuer
 spec:
   ingressClassName: traefik
+  tls:
+    - secretName: node-red-tls-cert
+      hosts:
+        - node-red.new.travisprosser.com
   rules:
     - host: node-red.home-server-k3s.lan
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: node-red
+                port:
+                  number: 1880
+    - host: node-red.new.travisprosser.com
       http:
         paths:
           - pathType: Prefix

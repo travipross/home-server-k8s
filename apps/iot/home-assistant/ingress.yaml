@@ -2,10 +2,26 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: home-assistant
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-cloudflare-cluster-issuer
 spec:
   ingressClassName: traefik
+  tls:
+    - secretName: home-assistant-tls-cert
+      hosts:
+        - home-assistant.new.travisprosser.com
   rules:
     - host: home-assistant.home-server-k3s.lan
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: home-assistant
+                port:
+                  number: 8123
+    - host: home-assistant.new.travisprosser.com
       http:
         paths:
           - pathType: Prefix

@@ -2,10 +2,26 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: sonarr
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-cloudflare-cluster-issuer
 spec:
   ingressClassName: traefik
+  tls:
+    - secretName: sonarr-tls-cert
+      hosts:
+        - sonarr.new.travisprosser.com
   rules:
     - host: sonarr.home-server-k3s.lan
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: sonarr
+                port:
+                  name: web-ui
+    - host: sonarr.new.travisprosser.com
       http:
         paths:
           - pathType: Prefix
