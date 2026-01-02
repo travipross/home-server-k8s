@@ -9,7 +9,7 @@ spec:
   tls:
     - secretName: sonarr-tls-cert
       hosts:
-        - sonarr.new.travisprosser.com
+        - sonarr-new.travisprosser.com
   rules:
     - host: sonarr.home-server-k3s.lan
       http:
@@ -21,7 +21,7 @@ spec:
                 name: sonarr
                 port:
                   name: web-ui
-    - host: sonarr.new.travisprosser.com
+    - host: sonarr-new.travisprosser.com
       http:
         paths:
           - pathType: Prefix

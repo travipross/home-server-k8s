@@ -9,7 +9,7 @@ spec:
   tls:
     - secretName: mosquitto-tls-cert
       hosts:
-        - mosquitto.new.travisprosser.com
+        - mosquitto-new.travisprosser.com
   rules:
     - host: mosquitto.home-server-k3s.lan
       http:
@@ -21,7 +21,7 @@ spec:
                 name: mosquitto
                 port:
                   number: 1883
-    - host: mosquitto.new.travisprosser.com
+    - host: mosquitto-new.travisprosser.com
       http:
         paths:
           - pathType: Prefix

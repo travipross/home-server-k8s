@@ -9,7 +9,7 @@ spec:
   tls:
     - secretName: node-red-tls-cert
       hosts:
-        - node-red.new.travisprosser.com
+        - node-red-new.travisprosser.com
   rules:
     - host: node-red.home-server-k3s.lan
       http:
@@ -21,7 +21,7 @@ spec:
                 name: node-red
                 port:
                   number: 1880
-    - host: node-red.new.travisprosser.com
+    - host: node-red-new.travisprosser.com
       http:
         paths:
           - pathType: Prefix

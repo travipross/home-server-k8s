@@ -9,7 +9,7 @@ spec:
   tls:
     - secretName: transmission-tls-cert
       hosts:
-        - transmission.new.travisprosser.com
+        - transmission-new.travisprosser.com
   rules:
     - host: transmission.home-server-k3s.lan
       http:
@@ -21,7 +21,7 @@ spec:
                 name: transmission
                 port:
                   name: web-ui
-    - host: transmission.new.travisprosser.com
+    - host: transmission-new.travisprosser.com
       http:
         paths:
           - pathType: Prefix

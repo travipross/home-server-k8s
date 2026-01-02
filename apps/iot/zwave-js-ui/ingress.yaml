@@ -9,7 +9,7 @@ spec:
   tls:
     - secretName: zwave-tls-cert
       hosts:
-        - zwave.new.travisprosser.com
+        - zwave-new.travisprosser.com
   rules:
     - host: zwave.home-server-k3s.lan
       http:
@@ -21,7 +21,7 @@ spec:
                 name: zwave-js-ui
                 port:
                   name: http
-    - host: zwave.new.travisprosser.com
+    - host: zwave-new.travisprosser.com
       http:
         paths:
           - pathType: Prefix

@@ -9,7 +9,7 @@ spec:
   tls:
     - secretName: esphome-tls-cert
       hosts:
-        - esphome.new.travisprosser.com
+        - esphome-new.travisprosser.com
   rules:
     - host: esphome.home-server-k3s.lan
       http:
@@ -21,7 +21,7 @@ spec:
                 name: esphome
                 port:
                   name: http
-    - host: esphome.new.travisprosser.com
+    - host: esphome-new.travisprosser.com
       http:
         paths:
           - pathType: Prefix

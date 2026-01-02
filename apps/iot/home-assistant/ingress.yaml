@@ -9,7 +9,7 @@ spec:
   tls:
     - secretName: home-assistant-tls-cert
       hosts:
-        - home-assistant.new.travisprosser.com
+        - home-assistant-new.travisprosser.com
   rules:
     - host: home-assistant.home-server-k3s.lan
       http:
@@ -21,7 +21,7 @@ spec:
                 name: home-assistant
                 port:
                   number: 8123
-    - host: home-assistant.new.travisprosser.com
+    - host: home-assistant-new.travisprosser.com
       http:
         paths:
           - pathType: Prefix
