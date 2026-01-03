@@ -152,7 +152,7 @@ ingress:
   enabled: true
   ingressClassName: traefik
   tls:
-    - secretName: cluster-issuer-tls-private-key
+    - secretName: frigate-tls-cert
       hosts:
         - frigate-new.travisprosser.com
   hosts:
