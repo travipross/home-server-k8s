@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: tunnel-token
+stringData:
+    token: ENC[AES256_GCM,data:7bHzSLTvKw20JBd/n7YGC13ONcTDqkWoqNblvsmHTq7VK9PogFAF6q+V5ESfGH4/cCWq974BLZat4uCJGet+nraTiCcfJWwcNZkVaJHl43AemoxN5kmRwsSovHQgGzNkFmToJA9GeUbJhv6xO0kmGUNsK0SnVymUQZh2awVzTHIu/873a0HloOGywbuMaEypT+zd14i4wAvc3vLSSb/JEZoXdlY1wVv1yRDfWkVFHpZ/yw+C3c8Jiw==,iv:cj+VnCwj/Yj6jFKKZorPxHNgayAEAiEalbFCTjbKASI=,tag:wST8DRSplXNuYL9ZSZVZ6A==,type:str]
+sops:
+    age:
+        - recipient: age1lyzn603kztevglyzhxxj6fcz4cptkvrt86yy7nul420w9f0kngtsnhmkln
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAxRUNSRUxYWit5ZUFwOGxt
+            bFg2eUZtbXdjRW1ZaThNZjZ1UkZZTWtoRGpJCmtndmlrd2RyZG95a1VyczVtTXFK
+            SitqM3ZST3YyeFVaN3lNSzhoWkhzcWcKLS0tIDFWS2F6NzBYYXcycGdrYTVObE9H
+            N3hVTW1XVlZDQWRDSXVVV1hVN0hkM1UK7Y1rPHM3RH+Yy1N3BZAtaxNBo/RNcjQt
+            02kQbqOZGQozkzsTPV40nMgRNvTppcCFbHkfMG0k+4FnHsnPXIo8sA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-01-03T01:41:47Z"
+    mac: ENC[AES256_GCM,data:4jefFoX6M7ZBPUZaE7yOzP42JnpCyMOdID1DJqt91ZLyVFVpM6uqDqE78D6NncQn3QPjHc97dJRDqfsanaDdcUGuueHi/4bVOFBwIrNhQd5VSBncaGrW5phs/0i4bj39w1PvwLtDwLXDR+zVAn8ZibAei8rqG2ytTvupLP3zBuE=,iv:XBeVTV/h5b1HuOZDcqIOVgwyvuCZQUatpCqbY4Nf/t0=,tag:2LPtsAYL1NuhhPBLGc9teA==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.11.0

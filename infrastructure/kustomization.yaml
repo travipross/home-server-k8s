@@ -4,4 +4,5 @@ resources:
   - ./longhorn/
   - ./sources/
   - ./csi-driver-nfs/
+  - ./cloudflared/
   - ./cert-manager/

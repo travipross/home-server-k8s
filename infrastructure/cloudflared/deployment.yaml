@@ -1,0 +1,55 @@
+# https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/deployment-guides/kubernetes/#5-create-pods-for-cloudflared
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudflared-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      pod: cloudflared
+  template:
+    metadata:
+      labels:
+        pod: cloudflared
+    spec:
+      securityContext:
+        sysctls:
+          - name: net.ipv4.ping_group_range
+            value: "65532 65532"
+      containers:
+        - image: cloudflare/cloudflared:2025.11.1
+          name: cloudflared
+          env:
+            - name: TUNNEL_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: tunnel-token
+                  key: token
+          command:
+            - cloudflared
+            - tunnel
+            - --no-autoupdate
+            - --loglevel
+            - info
+            - --metrics
+            - 0.0.0.0:2000
+            - run
+          livenessProbe:
+            httpGet:
+              path: /ready
+              port: 2000
+            failureThreshold: 1
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          # Needed to add this due to error:
+          #
+          # Warning: would violate PodSecurity "restricted:latest": allowPrivilegeEscalation != false (container "cloudflared" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "cloudflared" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "cloudflared" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "cloudflared" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
