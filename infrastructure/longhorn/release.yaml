@@ -11,4 +11,10 @@ spec:
         kind: HelmRepository
         name: longhorn-repo
       version: v1.10.0
+  values:
+    defaultSettings:
+      defaultReplicaCount: "1"
+      replicaSoftAntiAffinity: true
+    persistence:
+      defaultClassReplicaCount: 1
   interval: 1h
