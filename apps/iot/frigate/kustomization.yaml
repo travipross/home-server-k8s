@@ -5,6 +5,7 @@ commonLabels:
 resources:
   - appconfig-pvc.yaml
   - media-pvc.yaml
+  - repo.yaml
   - release.yaml
 configMapGenerator:
   - name: frigate-chart-values
