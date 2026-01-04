@@ -5,7 +5,6 @@ metadata:
   name: csi-driver-nfs
 spec:
   interval: 1h
-  targetNamespace: kube-system
   chart:
     spec:
       chart: csi-driver-nfs
@@ -30,7 +29,7 @@ spec:
           share: /volume1/storage-travipross
           subDir: k3s-pvcs/${pvc.metadata.namespace}-ns/${pvc.metadata.name}
         reclaimPolicy: Retain
-        volumeBindingMod: Immediate
+        volumeBindingMode: Immediate
         mountOptions:
           - nfsvers=4.1
           - hard
