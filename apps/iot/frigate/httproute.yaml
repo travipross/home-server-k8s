@@ -1,19 +1,19 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: esphome
+  name: frigate
 spec:
   parentRefs:
     - name: traefik-gateway
       namespace: traefik
   hostnames:
-    - esphome.travisprosser.ca
-    - esphome-new.travisprosser.com
+    - frigate.travisprosser.ca
+    - frigate-new.travisprosser.com
   rules:
     - matches:
         - path:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: esphome
-          port: 80
+        - name: frigate
+          port: 8971

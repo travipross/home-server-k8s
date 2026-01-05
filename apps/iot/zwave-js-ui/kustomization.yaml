@@ -3,7 +3,7 @@ kind: Kustomization
 commonLabels:
   app: zwave-js-ui
 resources:
-  - deployment.yaml
-  - ingress.yaml
   - pvc.yaml
+  - deployment.yaml
   - service.yaml
+  - httproute.yaml

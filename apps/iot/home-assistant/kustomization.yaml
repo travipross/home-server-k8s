@@ -4,6 +4,6 @@ commonLabels:
   app: home-assistant
 resources:
   - deployment.yaml
-  - ingress.yaml
   - pvc.yaml
   - service.yaml
+  - httproute.yaml

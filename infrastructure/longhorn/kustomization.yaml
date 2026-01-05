@@ -4,4 +4,4 @@ namespace: longhorn-system
 resources:
   - release.yaml
   - repo.yaml
-  - ingress.yaml
+  - httproute.yaml

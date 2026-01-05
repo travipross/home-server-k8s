@@ -149,24 +149,24 @@ service:
     app: frigate
 
 ingress:
-  enabled: true
-  ingressClassName: traefik
-  tls:
-    - secretName: frigate-tls-cert
-      hosts:
-        - frigate-new.travisprosser.com
-  hosts:
-    - host: frigate.home-server-k3s.lan
-      paths:
-        - path: "/"
-          portName: http-auth
-    - host: frigate-new.travisprosser.com
-      paths:
-        - path: "/"
-          portName: http-auth
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web
-    cert-manager.io/cluster-issuer: letsencrypt-cloudflare-cluster-issuer
+  enabled: false # using Gateway / HTTPRoute instead
+  # ingressClassName: traefik
+  # tls:
+  #   - secretName: frigate-tls-cert
+  #     hosts:
+  #       - frigate-new.travisprosser.com
+  # hosts:
+  #   - host: frigate.home-server-k3s.lan
+  #     paths:
+  #       - path: "/"
+  #         portName: http-auth
+  #   - host: frigate-new.travisprosser.com
+  #     paths:
+  #       - path: "/"
+  #         portName: http-auth
+  # annotations:
+  #   traefik.ingress.kubernetes.io/router.entrypoints: web
+  #   cert-manager.io/cluster-issuer: letsencrypt-cloudflare-cluster-issuer
 
 persistence:
   # use init container to copy config from configMap over to PVC at startup
