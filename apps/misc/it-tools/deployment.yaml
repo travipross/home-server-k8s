@@ -17,8 +17,8 @@ spec:
         app: it-tools
     spec:
       containers:
-        - image: corentinth/it-tools:2024.10.22-7ca5933
+        - image: sharevb/it-tools:2025.12.7
           name: it-tools
           ports:
-            - containerPort: 80
+            - containerPort: 8080
               name: web-ui
