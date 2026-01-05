@@ -4,3 +4,4 @@ namespace: misc
 resources:
   - namespace.yaml
   - ./excalidraw/
+  - ./it-tools/

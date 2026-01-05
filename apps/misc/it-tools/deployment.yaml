@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: it-tools
+  name: it-tools
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: it-tools
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: it-tools
+    spec:
+      containers:
+        - image: corentinth/it-tools:2024.10.22-7ca5933
+          name: it-tools
+          ports:
+            - containerPort: 80
+              name: web-ui
