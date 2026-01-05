@@ -5,3 +5,4 @@ resources:
   - namespace.yaml
   - ./excalidraw/
   - ./it-tools/
+  - ./strava-statistics/

@@ -1,0 +1,55 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: strava-import-and-build
+spec:
+  schedule: 30 */12 * * *
+  jobTemplate:
+    metadata:
+      name: strava-import-and-build
+    spec:
+      template:
+        spec:
+          # same container as deployment, but with different entrypoint
+          containers:
+            - image: robiningelbrecht/strava-statistics:v4.3.3
+              name: strava-import-and-build
+              # same volume mounts as the main deployment
+              volumeMounts:
+                - name: strava-statistics-database-pvc
+                  mountPath: /var/www/storage/database
+                - name: strava-statistics-files-pvc
+                  mountPath: /var/www/storage/files
+                - name: strava-statistics-config-pvc
+                  mountPath: /var/www/config/app
+                - name: strava-statistics-build-pvc
+                  mountPath: /var/www/build
+                - name: strava-statistics-config-cm
+                  mountPath: /var/www/config/app/config.yaml
+                  subPath: app-config.yaml
+              envFrom:
+                - secretRef:
+                    name: strava-statistics-oauth
+              command: ["/bin/sh", "-c"]
+              args:
+                - |
+                  bin/console app:strava:import-data && \
+                  bin/console app:strava:build-files
+          # same volumes as the main deployment
+          volumes:
+            - name: strava-statistics-config-cm
+              configMap:
+                name: strava-statistics-config
+            - name: strava-statistics-config-pvc
+              persistentVolumeClaim:
+                claimName: strava-statistics-config
+            - name: strava-statistics-database-pvc
+              persistentVolumeClaim:
+                claimName: strava-statistics-database
+            - name: strava-statistics-files-pvc
+              persistentVolumeClaim:
+                claimName: strava-statistics-files
+            - name: strava-statistics-build-pvc
+              persistentVolumeClaim:
+                claimName: strava-statistics-build
+          restartPolicy: OnFailure

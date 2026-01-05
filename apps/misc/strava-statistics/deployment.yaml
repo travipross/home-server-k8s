@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: strava-statistics
+  name: strava-statistics
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: strava-statistics
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: strava-statistics
+    spec:
+      containers:
+        - image: robiningelbrecht/strava-statistics:v4.3.3
+          name: strava-statistics
+          ports:
+            - containerPort: 8080
+              name: web-ui
+          volumeMounts:
+            - name: strava-statistics-database-pvc
+              mountPath: /var/www/storage/database
+            - name: strava-statistics-files-pvc
+              mountPath: /var/www/storage/files
+            - name: strava-statistics-build-pvc
+              mountPath: /var/www/build
+            - name: strava-statistics-config-pvc
+              mountPath: /var/www/config/app
+            - name: strava-statistics-config-cm
+              mountPath: /var/www/config/app/config.yaml
+              subPath: app-config.yaml
+          envFrom:
+            - secretRef:
+                name: strava-statistics-oauth
+      volumes:
+        - name: strava-statistics-config-cm
+          configMap:
+            name: strava-statistics-config
+        - name: strava-statistics-config-pvc
+          persistentVolumeClaim:
+            claimName: strava-statistics-config
+        - name: strava-statistics-database-pvc
+          persistentVolumeClaim:
+            claimName: strava-statistics-database
+        - name: strava-statistics-files-pvc
+          persistentVolumeClaim:
+            claimName: strava-statistics-files
+        - name: strava-statistics-build-pvc
+          persistentVolumeClaim:
+            claimName: strava-statistics-build
