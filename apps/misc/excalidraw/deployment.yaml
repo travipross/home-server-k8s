@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: excalidraw
+  name: excalidraw
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: excalidraw
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: excalidraw
+    spec:
+      containers:
+        # only publishing latest tag, so cannot used semver with renovate
+        - image: excalidraw/excalidraw:latest@sha256:9a92beb30c9bc18585bfd9adbb5cf7120b756b781363a66333b31cc8a0783e51
+          name: excalidraw
+          ports:
+            - containerPort: 80
+              name: web-ui
