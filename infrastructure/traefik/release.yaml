@@ -1,0 +1,50 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: traefik
+spec:
+  chart:
+    spec:
+      chart: traefik
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+  interval: 1m0s
+  values:
+    providers:
+      kubernetesGateway:
+        enabled: true
+      kubernetesIngress:
+        enabled: true
+    image:
+      registry: docker.io
+      repository: traefik
+      tag: 3.6.6
+    ingressRoute:
+      dashboard:
+        enabled: true
+    gateway:
+      listeners:
+        web:
+          namespacePolicy:
+            from: All
+    # The below values are copied from those that were used by the k3s-provided traefik chart found at /var/lib/rancher/k3s/server/manifests/traefik.yaml
+    tolerations:
+      - key: "CriticalAddonsOnly"
+        operator: "Exists"
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
+      - key: "node-role.kubernetes.io/master"
+        operator: "Exists"
+        effect: "NoSchedule"
+    service:
+      ipFamilyPolicy: "PreferDualStack"
+    priorityClassName: "system-cluster-critical"
+    # These conflict with existing annotations written due to .Values.ports.metrics.port and .Values.metrics.prometheus
+    # deployment:
+    #   podAnnotations:
+    #     prometheus.io/port: "8082"
+    #     prometheus.io/scrape: "true"
