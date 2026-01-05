@@ -7,3 +7,10 @@ resources:
   - travisprosser-ca-wildcard-cert.yaml
   - travisprosser-com-wildcard-cert.yaml
   - global-https-redirect-httproute.yaml
+  - dashboard-httproute.yaml
+configMapGenerator:
+  - name: traefik-helm-values
+    files:
+      - values.yaml
+configurations:
+  - kustomizeconfig.yaml

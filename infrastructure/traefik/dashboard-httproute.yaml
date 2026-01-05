@@ -1,20 +1,23 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: esphome
+  name: traefik-dashboard
 spec:
   parentRefs:
     - name: traefik-gateway
-      namespace: traefik
       port: 8443 # common port for all 'websecure-*' listeners on gateway
   hostnames:
-    - esphome.travisprosser.ca
-    - esphome-new.travisprosser.com
+    - "traefik.travisprosser.ca"
+    - "traefik.travisprosser.com"
   rules:
     - matches:
         - path:
             type: PathPrefix
-            value: /
+            value: /dashboard
+        - path:
+            type: PathPrefix
+            value: /api
       backendRefs:
-        - name: esphome
-          port: 80
+        - name: api@internal
+          kind: TraefikService
+          group: traefik.io
