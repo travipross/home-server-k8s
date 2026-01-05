@@ -6,9 +6,10 @@ spec:
   parentRefs:
     - name: traefik-gateway
       namespace: traefik
+      port: 8443 # common port for all 'websecure-*' listeners on gateway
   hostnames:
     - frigate.travisprosser.ca
-    - frigate-new.travisprosser.com
+    - frigate.travisprosser.com
   rules:
     - matches:
         - path:

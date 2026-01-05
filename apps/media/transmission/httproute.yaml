@@ -6,9 +6,10 @@ spec:
   parentRefs:
     - name: traefik-gateway
       namespace: traefik
+      port: 8443 # common port for all 'websecure-*' listeners on gateway
   hostnames:
     - transmission.travisprosser.ca
-    - transmission-new.travisprosser.com
+    - transmission.travisprosser.com
   rules:
     - matches:
         - path:

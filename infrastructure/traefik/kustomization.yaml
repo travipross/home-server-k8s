@@ -6,3 +6,4 @@ resources:
   - release.yaml
   - travisprosser-ca-wildcard-cert.yaml
   - travisprosser-com-wildcard-cert.yaml
+  - global-https-redirect-httproute.yaml

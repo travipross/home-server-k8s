@@ -6,13 +6,10 @@ spec:
   parentRefs:
     - name: traefik-gateway
       namespace: traefik
+      port: 8443 # common port for all 'websecure-*' listeners on gateway
   hostnames:
     - hassio.travisprosser.ca
-    - homeassistant.travisprosser.ca
-    - homeassistant.travisprosser.com
-    - home-assistant.travisprosser.ca
-    - home-assistant.travisprosser.com
-    - hassio-new.travisprosser.com
+    - hassio.travisprosser.com
   rules:
     - matches:
         - path:

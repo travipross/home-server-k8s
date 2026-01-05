@@ -6,11 +6,10 @@ spec:
   parentRefs:
     - name: traefik-gateway
       namespace: traefik
+      port: 8443 # common port for all 'websecure-*' listeners on gateway
   hostnames:
     - zwave.travisprosser.ca
     - zwave.travisprosser.com
-    - zwave-js-ui.travisprosser.ca
-    - zwave-js-ui-new.travisprosser.com
   rules:
     - matches:
         - path:
