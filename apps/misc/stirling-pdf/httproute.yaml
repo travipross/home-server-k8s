@@ -1,0 +1,20 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: stirling-pdf
+spec:
+  parentRefs:
+    - name: traefik-gateway
+      namespace: traefik
+      port: 8443 # common port for all 'websecure-*' listeners on gateway
+  hostnames:
+    - pdf.travisprosser.ca
+    - pdf.travisprosser.com
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: stirling-pdf
+          port: 8080

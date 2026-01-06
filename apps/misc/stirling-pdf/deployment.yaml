@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stirling-pdf
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      containers:
+        - image: stirlingtools/stirling-pdf:2.1.5
+          name: stirling-pdf
+          ports:
+            - containerPort: 8080
+              name: web-ui
+          volumeMounts:
+            - name: stirling-pdf-config-pvc
+              mountPath: /configs
+          startupProbe:
+            httpGet:
+              path: "/"
+              port: web-ui
+            periodSeconds: 10
+            failureThreshold: 30
+      volumes:
+        - name: stirling-pdf-config-pvc
+          persistentVolumeClaim:
+            claimName: stirling-pdf-config

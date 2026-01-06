@@ -6,3 +6,4 @@ resources:
   - ./excalidraw/
   - ./it-tools/
   - ./strava-statistics/
+  - ./stirling-pdf/
