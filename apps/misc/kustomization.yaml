@@ -7,3 +7,4 @@ resources:
   - ./it-tools/
   - ./strava-statistics/
   - ./stirling-pdf/
+  - ./lubelogger/

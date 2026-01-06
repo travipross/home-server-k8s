@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lubelogger
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      containers:
+        - image: ghcr.io/hargata/lubelogger:v1.5.6
+          name: lubelogger
+          ports:
+            - containerPort: 8080
+              name: web-ui
+          volumeMounts:
+            - name: lubelogger-data-pvc
+              mountPath: /App/data
+            - name: lubelogger-protection-keys-pvc
+              mountPath: /root/.aspnet/DataProtection-Keys
+      volumes:
+        - name: lubelogger-data-pvc
+          persistentVolumeClaim:
+            claimName: lubelogger-data
+        - name: lubelogger-protection-keys-pvc
+          persistentVolumeClaim:
+            claimName: lubelogger-protection-keys
