@@ -5,3 +5,5 @@ resources:
   - release.yaml
   - repo.yaml
   - httproute.yaml
+  - default-nightly-backup-recurringjob.yaml
+  - default-weekly-backup-recurringjob.yaml
