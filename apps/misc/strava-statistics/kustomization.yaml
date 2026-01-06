@@ -4,6 +4,7 @@ commonLabels:
   app: strava-statistics
 resources:
   - oauth-secret.enc.yaml
+  - app-config-secret.enc.yaml
   - config-pvc.yaml
   - build-pvc.yaml
   - database-pvc.yaml
@@ -15,4 +16,4 @@ resources:
 configMapGenerator:
   - name: strava-statistics-config
     files:
-      - app-config.yaml
+      - config.yaml

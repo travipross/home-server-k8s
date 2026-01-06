@@ -33,14 +33,26 @@ spec:
               mountPath: /var/www/config/app
             - name: strava-statistics-config-cm
               mountPath: /var/www/config/app/config.yaml
-              subPath: app-config.yaml
+              subPath: config.yaml
+            - name: strava-statistics-sensitive-config-secret
+              mountPath: /var/www/config/app/config-ai.yaml # will merge with main config due to config-*.yaml filename
+              subPath: config-ai.yaml
+            - name: strava-statistics-sensitive-config-secret
+              mountPath: /var/www/config/app/config-personal.yaml # will merge with main config due to config-*.yaml filename
+              subPath: config-personal.yaml
           envFrom:
             - secretRef:
                 name: strava-statistics-oauth
+          env:
+            - name: TZ
+              value: America/Halifax
       volumes:
         - name: strava-statistics-config-cm
           configMap:
             name: strava-statistics-config
+        - name: strava-statistics-sensitive-config-secret
+          secret:
+            secretName: strava-statistics-sensitive-config
         - name: strava-statistics-config-pvc
           persistentVolumeClaim:
             claimName: strava-statistics-config

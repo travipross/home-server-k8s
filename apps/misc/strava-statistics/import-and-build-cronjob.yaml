@@ -6,10 +6,11 @@ spec:
   schedule: 30 */12 * * *
   jobTemplate:
     metadata:
-      name: strava-import-and-build
+      name: strava-import-and-build-cron
     spec:
       template:
         spec:
+          restartPolicy: OnFailure
           # same container as deployment, but with different entrypoint
           containers:
             - image: robiningelbrecht/strava-statistics:v4.3.3
@@ -26,7 +27,13 @@ spec:
                   mountPath: /var/www/build
                 - name: strava-statistics-config-cm
                   mountPath: /var/www/config/app/config.yaml
-                  subPath: app-config.yaml
+                  subPath: config.yaml
+                - name: strava-statistics-sensitive-config-secret
+                  mountPath: /var/www/config/app/config-ai.yaml # will merge with main config due to config-*.yaml filename
+                  subPath: config-ai.yaml
+                - name: strava-statistics-sensitive-config-secret
+                  mountPath: /var/www/config/app/config-personal.yaml # will merge with main config due to config-*.yaml filename
+                  subPath: config-personal.yaml
               envFrom:
                 - secretRef:
                     name: strava-statistics-oauth
@@ -40,6 +47,9 @@ spec:
             - name: strava-statistics-config-cm
               configMap:
                 name: strava-statistics-config
+            - name: strava-statistics-sensitive-config-secret
+              secret:
+                secretName: strava-statistics-sensitive-config
             - name: strava-statistics-config-pvc
               persistentVolumeClaim:
                 claimName: strava-statistics-config
@@ -52,4 +62,3 @@ spec:
             - name: strava-statistics-build-pvc
               persistentVolumeClaim:
                 claimName: strava-statistics-build
-          restartPolicy: OnFailure
