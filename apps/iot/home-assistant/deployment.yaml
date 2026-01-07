@@ -19,9 +19,22 @@ spec:
           ports:
             - containerPort: 8123
           volumeMounts:
-            - name: home-assistant-config-storage
+            - name: home-assistant-config-pvc
               mountPath: /config
+        # Sidecar container for easier editing of
+        - name: code-server
+          image: lscr.io/linuxserver/code-server:4.107.0
+          volumeMounts:
+            - name: home-assistant-code-server-config-pvc
+              mountPath: /config
+            - name: home-assistant-config-pvc
+              mountPath: /config/workspace/home-assistant/config
+          ports:
+            - containerPort: 8443
       volumes:
-        - name: home-assistant-config-storage
+        - name: home-assistant-config-pvc
           persistentVolumeClaim:
             claimName: home-assistant-config
+        - name: home-assistant-code-server-config-pvc
+          persistentVolumeClaim:
+            claimName: home-assistant-code-server-config

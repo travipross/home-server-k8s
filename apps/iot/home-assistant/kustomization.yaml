@@ -3,7 +3,9 @@ kind: Kustomization
 commonLabels:
   app: home-assistant
 resources:
-  - deployment.yaml
   - pvc.yaml
+  - code-server-pvc.yaml
+  - deployment.yaml
   - service.yaml
   - httproute.yaml
+  - code-server-httproute.yaml

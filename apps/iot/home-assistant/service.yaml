@@ -5,6 +5,9 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - name: http
+    - name: web-ui
       port: 8123
       targetPort: 8123
+    - name: code-server
+      port: 8443
+      targetPort: 8443
