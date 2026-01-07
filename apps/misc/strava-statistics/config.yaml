@@ -169,9 +169,17 @@ integrations:
     # Leave empty to disable notifications entirely.
     services: []
     # - 'ntfy://ntfy.sh/topic'
-    # agent:
-    #   commands:
-    #    For a detailed guide on how to configure pre-defined chat commands, visit: https://statistics-for-strava-docs.robiningelbrecht.be/#/configuration/ai-integration?id=pre-defining-chat-commands
+  ai:
+    enabled: true
+    enableUI: true
+    provider: "gemini"
+    configuration:
+      model: "gemini-2.5-flash-lite"
+    agent:
+      commands:
+        - command: "analyze-last-ride"
+          message: "You are my workout trainer. Please look up and compare my most recent activity to the 5 previous activities of the same type (or as many activities of that type as are available). Analyze all data for those activities that you have access to, and present any meaningful insights or trends among the activities that were selected for comparison. Do not ask follow-up questions. No more data will be provided beyond what you have access to in your activity search. Summarize data tabularly, followed by a brief narrative summary that highlights the most notable details."
+
 daemon:
   # A list of actions that the application runs at regular intervals according to their defined schedule.
   # Notification-related actions require the integrations.notifications.ntfyUrl setting to be configured.
