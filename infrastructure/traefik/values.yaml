@@ -2,7 +2,6 @@ image:
   registry: docker.io
   repository: traefik
   tag: 3.6.6
-# WORKING BUT NOT CERTAIN OF QUALITY
 providers:
   kubernetesGateway:
     enabled: true
@@ -46,8 +45,4 @@ tolerations:
 service:
   ipFamilyPolicy: "PreferDualStack"
 priorityClassName: "system-cluster-critical"
-# These conflict with existing annotations written due to .Values.ports.metrics.port and .Values.metrics.prometheus
-# deployment:
-#   podAnnotations:
-#     prometheus.io/port: "8082"
-#     prometheus.io/scrape: "true"
+

@@ -10,6 +10,7 @@ spec:
   # No `hostnames` means it applies to ALL requests handled by the specified listener
   rules:
     - filters:
+        # Upgrade all HTTP requests on the web listener of the Gateway to HTTPS, handled by the websecure listener
         - type: RequestRedirect
           requestRedirect:
             scheme: https

@@ -6,7 +6,7 @@ spec:
   parentRefs:
     - name: traefik-gateway
       namespace: traefik
-      port: 8443 # common port for all 'websecure-*' listeners on gateway
+      sectionName: websecure
   hostnames:
     - hassio.travisprosser.ca
     - hassio.travisprosser.com

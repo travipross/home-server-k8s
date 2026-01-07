@@ -5,7 +5,7 @@ metadata:
 spec:
   parentRefs:
     - name: traefik-gateway
-      port: 8443 # common port for all 'websecure-*' listeners on gateway
+      sectionName: websecure
   hostnames:
     - "traefik.travisprosser.ca"
     - "traefik.travisprosser.com"
