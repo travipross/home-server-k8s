@@ -31,6 +31,9 @@ spec:
               mountPath: /config/workspace/home-assistant/config
           ports:
             - containerPort: 8443
+          env:
+            - name: PGID
+              value: "1000"  # Allows write-access to the files owned by home assistant
       volumes:
         - name: home-assistant-config-pvc
           persistentVolumeClaim:
