@@ -15,5 +15,6 @@
       "enabled": false,
       "description": ["Ignore Kubernetes `apiVersion` updates in manifests"]
     }
-  ]
+  ],
+  "reviewers": ["travipross"]
 }
