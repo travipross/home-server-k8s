@@ -17,7 +17,7 @@ spec:
         app: strava-statistics
     spec:
       containers:
-        - image: robiningelbrecht/strava-statistics:v4.3.4
+        - image: robiningelbrecht/strava-statistics:v4.3.5
           name: strava-statistics
           ports:
             - containerPort: 8080
