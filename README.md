@@ -185,6 +185,11 @@ Workloads are grouped into namespaces by "family":
 
 - **Automated Updates**: Renovate is configured to scan the repository for outdated Docker images, Helm charts, and GitHub Actions, automatically creating Pull Requests to keep the stack current.
 
+> [!WARN]
+> See [this link](https://docs.renovatebot.com/modules/manager/flux/#helmrelease-support:~:text=In%20addition%2C%20for%20the%20flux%20manager%20to%20properly%20link%20HelmRelease%20and%20HelmRepository%20resources%2C%20both%20of%20the%20following%20conditions%20must%20be%20met%3A) in the Renovate Docs for a "gotcha" regarding its ability to detect Flux's `HelmRelease` and `HelmRepository` dependencies.
+>
+> Though undocumented, it appears that so long as the `HelmRelease` and `HelmRepository` share a common `metadata.name`, this seems to satisfy the Renovate requirement and successfully associates the two resources.
+
 ## Helper Utilities and Patterns
 
 ### VS Code Sidecar Pattern

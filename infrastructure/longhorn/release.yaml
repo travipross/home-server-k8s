@@ -2,15 +2,16 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: longhorn-release
+  namespace: longhorn-system # Included in addition to kustomization.yaml due to Renovate, because name does not match that of the associated HelmRepository
 spec:
   chart:
     spec:
       chart: longhorn
+      version: 1.10.0
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
         name: longhorn-repo
-      version: v1.10.0
   values:
     defaultSettings:
       defaultReplicaCount: "1"

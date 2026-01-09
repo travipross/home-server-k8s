@@ -2,7 +2,18 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "kubernetes": {
-    "managerFilePatterns": ["/(clusters|apps|infrastructure)/.+\\.yaml$/"]
+    "managerFilePatterns": ["/(clusters|apps|infrastructure)/.+\\.yaml$/"],
+    "description": "Look for any YAML file found within directories that contain Kubernetes manifests (typically will be deployment.yaml, but not necessarily)."
   },
-  "assignees": ["travipross"]
+  "flux": {
+    "managerFilePatterns": ["/(clusters|apps|infrastructure)/.+(release|repo)\\.yaml$/"],
+    "description": "Look for Flux HelmRelease or HelmRepository resources, typically named `release.yaml`/`repo.yaml` respectively."
+  },
+  "packageRules": [
+    {
+      "matchDatasources": ["kubernetes-api"],
+      "enabled": false,
+      "description": ["Ignore Kubernetes `apiVersion` updates in manifests"]
+    }
+  ]
 }

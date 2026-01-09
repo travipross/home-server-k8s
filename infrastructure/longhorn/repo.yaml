@@ -2,6 +2,7 @@ apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: longhorn-repo
+  namespace: longhorn-system  # Included in addition to kustomization.yaml due to Renovate, because name does not match that of the associated HelmRelease
 spec:
   interval: 1h
   url: https://charts.longhorn.io
