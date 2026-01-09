@@ -7,3 +7,6 @@
 
 # track the file named .sops.yaml as it is a config file used by sops CLI
 !.sops.yaml
+
+# Ignore files that are dumped for inspecting helm chart default values
+*-default-values.yaml
