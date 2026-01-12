@@ -46,6 +46,38 @@ spec:
           env:
             - name: TZ
               value: America/Halifax
+      initContainers:
+        # Rebuild files on startup
+        - image: robiningelbrecht/strava-statistics:v4.3.6
+          name: strava-statistics-init-build-files
+          volumeMounts:
+            - name: strava-statistics-database-pvc
+              mountPath: /var/www/storage/database
+            - name: strava-statistics-files-pvc
+              mountPath: /var/www/storage/files
+            - name: strava-statistics-build-pvc
+              mountPath: /var/www/build
+            - name: strava-statistics-config-pvc
+              mountPath: /var/www/config/app
+            - name: strava-statistics-config-cm
+              mountPath: /var/www/config/app/config.yaml
+              subPath: config.yaml
+            - name: strava-statistics-sensitive-config-secret
+              mountPath: /var/www/config/app/config-ai.yaml # will merge with main config due to config-*.yaml filename
+              subPath: config-ai.yaml
+            - name: strava-statistics-sensitive-config-secret
+              mountPath: /var/www/config/app/config-personal.yaml # will merge with main config due to config-*.yaml filename
+              subPath: config-personal.yaml
+          envFrom:
+            - secretRef:
+                name: strava-statistics-oauth
+          env:
+            - name: TZ
+              value: America/Halifax
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              bin/console app:strava:build-files
       volumes:
         - name: strava-statistics-config-cm
           configMap:
