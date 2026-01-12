@@ -9,7 +9,7 @@ spec:
   template:
     spec:
       containers:
-        - image: stirlingtools/stirling-pdf:2.2.0
+        - image: stirlingtools/stirling-pdf:2.2.1
           name: stirling-pdf
           ports:
             - containerPort: 8080
