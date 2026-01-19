@@ -17,7 +17,7 @@ spec:
         app: strava-statistics
     spec:
       containers:
-        - image: robiningelbrecht/strava-statistics:v4.3.6
+        - image: robiningelbrecht/strava-statistics:v4.4.0
           name: strava-statistics
           ports:
             - containerPort: 8080
@@ -48,7 +48,7 @@ spec:
               value: America/Halifax
       initContainers:
         # Rebuild files on startup
-        - image: robiningelbrecht/strava-statistics:v4.3.6
+        - image: robiningelbrecht/strava-statistics:v4.4.0
           name: strava-statistics-init-build-files
           volumeMounts:
             - name: strava-statistics-database-pvc
