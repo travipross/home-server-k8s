@@ -9,7 +9,7 @@ spec:
   template:
     spec:
       containers:
-        - image: ghcr.io/hargata/lubelogger:v1.5.7
+        - image: ghcr.io/hargata/lubelogger:v1.5.8
           name: lubelogger
           ports:
             - containerPort: 8080
