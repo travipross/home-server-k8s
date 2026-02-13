@@ -23,7 +23,7 @@ spec:
               mountPath: /config
         # Sidecar container for easier editing of
         - name: code-server
-          image: lscr.io/linuxserver/code-server:4.108.2
+          image: lscr.io/linuxserver/code-server:4.109.2
           volumeMounts:
             - name: home-assistant-code-server-config-pvc
               mountPath: /config
