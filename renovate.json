@@ -1,20 +1,40 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
+  "extends": [
+    "config:recommended"
+  ],
   "kubernetes": {
-    "managerFilePatterns": ["/(clusters|apps|infrastructure)/.+\\.yaml$/"],
+    "managerFilePatterns": [
+      "/(clusters|apps|infrastructure)/.+\\.yaml$/"
+    ],
     "description": "Look for any YAML file found within directories that contain Kubernetes manifests (typically will be deployment.yaml, but not necessarily)."
   },
   "flux": {
-    "managerFilePatterns": ["/(clusters|apps|infrastructure)/.+(release|repo)\\.yaml$/"],
+    "managerFilePatterns": [
+      "/(clusters|apps|infrastructure)/.+(release|repo)\\.yaml$/"
+    ],
     "description": "Look for Flux HelmRelease or HelmRepository resources, typically named `release.yaml`/`repo.yaml` respectively."
   },
   "packageRules": [
     {
-      "matchDatasources": ["kubernetes-api"],
+      "matchDatasources": [
+        "kubernetes-api"
+      ],
       "enabled": false,
-      "description": ["Ignore Kubernetes `apiVersion` updates in manifests"]
+      "description": [
+        "Ignore Kubernetes `apiVersion` updates in manifests"
+      ]
+    },
+    {
+      "matchPackageNames": [
+        "fluxcd/flux2",
+        "ghcr.io/fluxcd/*"
+      ],
+      "groupName": "FluxCD System Components",
+      "description": "Update all flux components in single PR"
     }
   ],
-  "assignees": ["travipross"]
+  "assignees": [
+    "travipross"
+  ]
 }

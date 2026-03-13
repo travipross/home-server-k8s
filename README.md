@@ -190,6 +190,39 @@ Workloads are grouped into namespaces by "family":
 >
 > Though undocumented, it appears that so long as the `HelmRelease` and `HelmRepository` share a common `metadata.name`, this seems to satisfy the Renovate requirement and successfully associates the two resources.
 
+### Testing Renovate Config
+
+#### Validating
+
+To validate the renovate config, run the config validator utility with the official docker container:
+
+```bash
+docker run \
+  --rm \
+  -t \
+  -v ./renovate.json:/renovate.json \
+  --entrypoint renovate-config-validator \
+  ghcr.io/renovatebot/renovate \
+    --strict \
+    /renovate.json
+```
+
+#### Dry Run
+
+To run renovate via `docker` locally (e.g. to test config changes), run:
+
+```bash
+docker run --rm \
+  -e LOG_LEVEL=debug \
+  -e RENOVATE_TOKEN=$RENOVATE_TOKEN \
+  -e RENOVATE_GITHUB_COM_TOKEN=$RENOVATE_TOKEN \
+  -v $(pwd):/usr/src/app  ghcr.io/renovatebot/renovate \
+    --dry-run=lookup \
+    --platform=local
+```
+
+See the [Renovate Local Platform docs](https://docs.renovatebot.com/modules/platform/local/#local) for more information.
+
 ## Helper Utilities and Patterns
 
 ### VS Code Sidecar Pattern
