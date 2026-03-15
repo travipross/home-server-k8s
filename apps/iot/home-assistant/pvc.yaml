@@ -8,4 +8,5 @@ spec:
   resources:
     requests:
       storage: 5Gi
-  storageClassName: longhorn
+  storageClassName: longhorn-retain
+  volumeName: home-assistant-config

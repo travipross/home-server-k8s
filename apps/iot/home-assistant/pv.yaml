@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: home-assistant-config
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-retain
+  csi:
+    driver: driver.longhorn.io
+    volumeHandle: pvc-41da47a0-2254-42e8-bc8d-a0fa35a03581  # originally dynamically created
