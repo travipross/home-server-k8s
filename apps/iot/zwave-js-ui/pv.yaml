@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: zwave-js-ui-config
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-retain
+  csi:
+    driver: driver.longhorn.io
+    volumeHandle: pvc-ba99498c-b208-4345-9222-3f6c00726f48  # originally dynamically created

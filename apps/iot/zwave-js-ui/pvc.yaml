@@ -8,4 +8,5 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: longhorn
+  storageClassName: longhorn-retain
+  volumeName: zwave-js-ui-config  # originally dynamically created
