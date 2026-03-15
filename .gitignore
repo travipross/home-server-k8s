@@ -10,3 +10,6 @@
 
 # Ignore files that are dumped for inspecting helm chart default values
 *-default-values.yaml
+
+# Ignore various manifests marked as examples
+*-example.yaml
