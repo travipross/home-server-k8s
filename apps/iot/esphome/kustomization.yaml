@@ -3,7 +3,8 @@ kind: Kustomization
 commonLabels:
   app: esphome
 resources:
-  - deployment.yaml
+  - pv.yaml
   - pvc.yaml
+  - deployment.yaml
   - service.yaml
   - httproute.yaml
