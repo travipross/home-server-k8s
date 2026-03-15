@@ -7,3 +7,4 @@ resources:
   - httproute.yaml
   - default-nightly-backup-recurringjob.yaml
   - default-weekly-backup-recurringjob.yaml
+  - storageclass-retain.yaml
