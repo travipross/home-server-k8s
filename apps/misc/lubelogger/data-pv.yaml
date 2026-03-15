@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: lubelogger-data
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-retain
+  csi:
+    driver: driver.longhorn.io
+    volumeHandle: pvc-cdc5363a-1499-4d80-b45a-53cc52b12bbd  # originally dynamically created

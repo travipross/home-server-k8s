@@ -3,6 +3,8 @@ kind: Kustomization
 commonLabels:
   app: lubelogger
 resources:
+  - data-pv.yaml
+  - protection-keys-pv.yaml
   - data-pvc.yaml
   - protection-keys-pvc.yaml
   - deployment.yaml

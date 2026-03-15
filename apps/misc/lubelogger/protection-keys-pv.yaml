@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: lubelogger-protection-keys
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-retain
+  csi:
+    driver: driver.longhorn.io
+    volumeHandle: pvc-79c4554e-a859-499e-bbf9-070d44110c0e  # originally dynamically created

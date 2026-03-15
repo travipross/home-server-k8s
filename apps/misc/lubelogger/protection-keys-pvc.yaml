@@ -8,5 +8,5 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: longhorn
-  volumeName: "pvc-79c4554e-a859-499e-bbf9-070d44110c0e" # originally dynamically created
+  storageClassName: longhorn-retain
+  volumeName: lubelogger-protection-keys # originally dynamically created
