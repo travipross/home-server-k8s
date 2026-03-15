@@ -17,4 +17,4 @@ spec:
             value: /
       backendRefs:
         - name: zwave-js-ui
-          port: 8971
+          port: 80
