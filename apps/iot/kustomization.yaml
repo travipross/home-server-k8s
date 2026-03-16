@@ -10,7 +10,6 @@ resources:
   - ./mosquitto/
   - ./node-red/
   - ./zwave-js-ui/
-  - ./amcrest2mqtt/
 configMapGenerator:
   - name: camera-configs
     envs:
