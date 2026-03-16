@@ -32,6 +32,13 @@
       ],
       "groupName": "FluxCD System Components",
       "description": "Update all flux components in single PR"
+    },
+    {
+      "matchPackageNames": [
+        "stirlingtools/stirling-pdf"
+      ],
+      "schedule": ["* * * * 0,6"],
+      "description": "Update StirlingPDF on weekends only"
     }
   ],
   "assignees": [
