@@ -25,5 +25,3 @@ spec:
       apiVersion: controller.config.cert-manager.io/v1alpha1
       kind: ControllerConfiguration
       enableGatewayAPI: true
-    dns01RecursiveNameservers: "1.1.1.1:53,0.0.0.0:53"
-    dns01RecursiveNameserversOnly: true
