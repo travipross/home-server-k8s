@@ -5,5 +5,11 @@ metadata:
   labels:
     app: cloudflared
 resources:
-  - tunnel-token.enc.yaml
-  - deployment.yaml
+  - remote-tunnel-token.enc.yaml
+  - remote-tunnel-deployment.yaml
+  - local-tunnel-credentials-secret.enc.yaml
+  - local-tunnel-deployment.yaml
+configMapGenerator:
+  - name: local-tunnel-config
+    files:
+      - local-tunnel-config.yaml

@@ -2,16 +2,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cloudflared-deployment
+  name: cloudflared-remote-tunnel
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      pod: cloudflared
+      app: cloudflared
   template:
     metadata:
       labels:
-        pod: cloudflared
+        app: cloudflared
     spec:
       securityContext:
         sysctls:
@@ -19,7 +19,7 @@ spec:
             value: "65532 65532"
       containers:
         - image: cloudflare/cloudflared:2026.3.0
-          name: cloudflared
+          name: cloudflared-remote-tunnel
           env:
             - name: TUNNEL_TOKEN
               valueFrom:

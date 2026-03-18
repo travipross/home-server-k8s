@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudflared-local-tunnel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudflared
+  template:
+    metadata:
+      labels:
+        app: cloudflared
+    spec:
+      containers:
+      - name: cloudflared-local-tunnel
+        image: cloudflare/cloudflared:2026.3.0
+        command:
+          - cloudflared
+          - tunnel
+          - --no-autoupdate
+          - --loglevel
+          - info
+          - --metrics
+          - 0.0.0.0:2000
+          - --config
+          - /etc/cloudflared/config/local-tunnel-config.yaml
+          - --credentials-file
+          - /etc/cloudflared/creds/credentials.json
+          - run
+        livenessProbe:
+            httpGet:
+              path: /ready
+              port: 2000
+            failureThreshold: 1
+            initialDelaySeconds: 10
+            periodSeconds: 10
+        volumeMounts:
+          - name: config-cm
+            mountPath: /etc/cloudflared/config
+            readOnly: true
+          - name: tunnel-credentials-secret
+            mountPath: /etc/cloudflared/creds
+            readOnly: true
+      volumes:
+        - name: config-cm
+          configMap:
+            name: local-tunnel-config
+        - name: tunnel-credentials-secret
+          secret:
+            secretName: tunnel-credentials
+          
