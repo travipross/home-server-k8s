@@ -5,7 +5,9 @@ metadata:
 spec:
   parentRefs:
     - name: traefik-gateway
-      sectionName: websecure
+      sectionName: websecure-ca
+    - name: traefik-gateway
+      sectionName: websecure-com
   hostnames:
     - "traefik.travisprosser.ca"
     - "traefik.travisprosser.com"

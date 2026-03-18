@@ -6,7 +6,10 @@ spec:
   parentRefs:
     - name: traefik-gateway
       namespace: traefik
-      sectionName: websecure
+      sectionName: websecure-ca
+    - name: traefik-gateway
+      namespace: traefik
+      sectionName: websecure-com
   hostnames:
     - frigate.travisprosser.ca
     - frigate.travisprosser.com
