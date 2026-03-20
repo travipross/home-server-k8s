@@ -32,7 +32,7 @@ jobs:
       TF_VAR_zone_id: ${{ secrets.TF_VAR_zone_id }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: hashicorp/setup-terraform@v1
 
       - name: Terraform Format
