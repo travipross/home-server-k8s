@@ -13,3 +13,12 @@
 
 # Ignore various manifests marked as examples
 *-example.yaml
+
+# Ignore sensitive terraform values
+.terraform/
+*.tfstate*
+.terraform.lock.hcl
+terraform.tfvars
+
+# Ignore Cloudflare CLI cache
+.wrangler/
