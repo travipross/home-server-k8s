@@ -22,7 +22,8 @@ resource "cloudflare_zero_trust_access_application" "travisprosser_ca_wildcard" 
   }]
   policies = [
     {
-      id = cloudflare_zero_trust_access_policy.travis_only.id
+      id         = cloudflare_zero_trust_access_policy.travis_only.id
+      precedence = 10000
     }
   ]
 }

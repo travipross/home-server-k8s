@@ -53,7 +53,7 @@ variable "tunnel_id" {
 }
 
 locals {
-  tunnel_address = "${var.tunnel_id}.cfargotunnel.com"
+  locally_managed_tunnel_address = "${var.tunnel_id}.cfargotunnel.com"
 }
 
 
