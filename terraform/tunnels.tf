@@ -3,12 +3,10 @@ locals {
   raw_apps = {
     "Strava" = {
       subdomain = "strava"
-      service   = "http://strava-statistics.misc:8080"
       policy_id = cloudflare_zero_trust_access_policy.travis_and_emma.id
     },
     "Frigate" = {
       subdomain = "frigate"
-      service   = "http://frigate.iot:5000"
       policy_id = cloudflare_zero_trust_access_policy.travis_and_emma.id
     },
     "Hello World" = {
@@ -18,13 +16,14 @@ locals {
   }
 
   default_policy_id = cloudflare_zero_trust_access_policy.travis_only.id
+  default_service   = "https://traefik.traefik.svc.cluster.local:443" # Gateway LoadBalancer service
 
   // overlay map to apply default values
   apps = {
     for name, config in local.raw_apps : name => {
       subdomain = config.subdomain
-      service   = config.service
-      // replace null or missing with default
+      // replace null or missing vals with defaults
+      service   = coalesce(try(config.service, null), local.default_service)
       policy_id = coalesce(try(config.policy_id, null), local.default_policy_id)
     }
   }
@@ -66,6 +65,9 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "home_server_k3s" {
   account_id = var.cf_account_id
   tunnel_id  = cloudflare_zero_trust_tunnel_cloudflared.home_server_k3s.id
   config = {
+    origin_request = {
+      match_sn_ito_host = true # Ensures cloudflared sets the appropriate value for SNI so that Traefik can present a valid TLS cert
+    }
     ingress = concat(
       [
         for name, app in local.apps : {
