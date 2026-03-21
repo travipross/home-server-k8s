@@ -37,6 +37,16 @@ resource "cloudflare_zero_trust_tunnel_cloudflared" "home_server_k3s" {
   name       = "home-server-k3s"
 }
 
+data "cloudflare_zero_trust_tunnel_cloudflared_token" "home_server_k3s_token" {
+  account_id = var.cf_account_id
+  tunnel_id  = cloudflare_zero_trust_tunnel_cloudflared.home_server_k3s.id
+}
+
+output "tunnel_token" {
+  value     = data.cloudflare_zero_trust_tunnel_cloudflared_token.home_server_k3s_token.token
+  sensitive = true
+}
+
 
 // DNS CNAME records for each app
 resource "cloudflare_dns_record" "apps" {
