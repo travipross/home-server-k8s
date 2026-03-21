@@ -1,8 +1,3 @@
-import {
-  to = cloudflare_zero_trust_access_group.travis
-  id = "accounts/${var.cf_account_id}/e1877b8e-31e3-45d5-bfc1-48201e1903f0"
-}
-
 resource "cloudflare_zero_trust_access_group" "travis" {
   account_id = var.cf_account_id
   is_default = true
@@ -18,12 +13,6 @@ resource "cloudflare_zero_trust_access_group" "travis" {
     }
   }]
   require = []
-}
-
-
-import {
-  to = cloudflare_zero_trust_access_group.faris
-  id = "accounts/${var.cf_account_id}/6073b42a-2bb2-47d3-8dc8-b6c43f99523f"
 }
 
 resource "cloudflare_zero_trust_access_group" "faris" {
@@ -46,12 +35,6 @@ resource "cloudflare_zero_trust_access_group" "faris" {
   require = []
 }
 
-
-import {
-  to = cloudflare_zero_trust_access_group.emma
-  id = "accounts/${var.cf_account_id}/7091e53f-4bda-4c0d-94d1-0dd80aea5689"
-}
-
 resource "cloudflare_zero_trust_access_group" "emma" {
   account_id = var.cf_account_id
   name       = "Emma"
@@ -66,12 +49,6 @@ resource "cloudflare_zero_trust_access_group" "emma" {
     }
   }]
   require = []
-}
-
-
-import {
-  to = cloudflare_zero_trust_access_group.travis_and_emma
-  id = "accounts/${var.cf_account_id}/a20a9647-ae1c-48d0-b29b-d7f68c070d91"
 }
 
 resource "cloudflare_zero_trust_access_group" "travis_and_emma" {
@@ -89,4 +66,3 @@ resource "cloudflare_zero_trust_access_group" "travis_and_emma" {
   }]
   require = []
 }
-

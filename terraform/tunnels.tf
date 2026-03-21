@@ -31,11 +31,6 @@ locals {
 }
 
 // Tunnel
-import {
-  to = cloudflare_zero_trust_tunnel_cloudflared.home_server_k3s
-  id = "${var.cf_account_id}/8f73c5f2-4142-405a-91c6-58892f43ed92"
-}
-
 resource "cloudflare_zero_trust_tunnel_cloudflared" "home_server_k3s" {
   account_id = var.cf_account_id
   config_src = "cloudflare"
@@ -92,3 +87,29 @@ resource "cloudflare_zero_trust_access_application" "apps" {
     id = each.value.policy_id
   }]
 }
+
+// Catch-all Application
+resource "cloudflare_zero_trust_access_application" "travisprosser_ca_wildcard" {
+  account_id                 = var.cf_account_id
+  allowed_idps               = []
+  app_launcher_visible       = true
+  auto_redirect_to_identity  = false
+  domain                     = "*.travisprosser.ca"
+  enable_binding_cookie      = false
+  http_only_cookie_attribute = false
+  name                       = "Catch-all travisprosser.ca"
+  options_preflight_bypass   = false
+  session_duration           = "24h"
+  tags                       = []
+  type                       = "self_hosted"
+  destinations = [{
+    type = "public"
+    uri  = "*.travisprosser.ca"
+  }]
+  policies = [
+    {
+      id = cloudflare_zero_trust_access_policy.travis_only.id
+    }
+  ]
+}
+
