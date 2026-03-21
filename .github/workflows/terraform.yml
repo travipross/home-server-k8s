@@ -30,6 +30,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       TF_VAR_zone_id: ${{ secrets.TF_VAR_zone_id }}
+      TF_VAR_account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
     steps:
       - uses: actions/checkout@v6
@@ -56,7 +57,8 @@ jobs:
       - name: Create PR Comment
         uses: actions/github-script@v8
         env:
-          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+          PLAN: "${{ steps.plan.outputs.stdout }}"
+          PLAN_ERROR: "${{ steps.plan.outputs.stderr }}"
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -73,15 +75,15 @@ jobs:
 
             #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
 
+            ${process.env.PLAN_ERROR}
+
             <details><summary>Show Plan</summary>
 
             \`\`\`\n
             ${process.env.PLAN}
             \`\`\`
 
-            </details>
-
-            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Workflow: \`${{ github.workflow }}\`*`;
+            </details>`;
 
 
             // Add output to summary
@@ -119,6 +121,10 @@ jobs:
                 })
               }
             }
+
+      - name: Exit if previous step failed
+        if: steps.plan.outcome == 'failure' || steps.fmt.outcome == 'failure'
+        run: exit 1
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'

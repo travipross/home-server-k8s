@@ -26,8 +26,16 @@ provider "cloudflare" {
   # CLOUDFLARE_API_TOKEN=<token>
 }
 
+
+
 variable "zone_id" {
   description = "Cloudflare Zone ID"
+  type        = string
+  sensitive   = true
+}
+
+variable "account_id" {
+  description = "Cloudflare Account ID"
   type        = string
   sensitive   = true
 }
@@ -44,23 +52,8 @@ variable "tunnel_id" {
   default     = "b073626e-a418-40b0-ade3-3a711b102204"
 }
 
-
-resource "cloudflare_dns_record" "strava" {
-  zone_id = var.zone_id
-  name    = "strava"
-  content = "${var.tunnel_id}.cfargotunnel.com"
-  type    = "CNAME"
-  ttl     = 1
-  proxied = true
-  comment = "Statistics for Strava tunnel"
+locals {
+  locally_managed_tunnel_address = "${var.tunnel_id}.cfargotunnel.com"
 }
 
-resource "cloudflare_dns_record" "frigate" {
-  zone_id = var.zone_id
-  name    = "frigate"
-  content = "${var.tunnel_id}.cfargotunnel.com"
-  type    = "CNAME"
-  ttl     = 1
-  proxied = true
-  comment = "Frigate tunnel"
-}
+
