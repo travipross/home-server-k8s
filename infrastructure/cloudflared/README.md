@@ -1,14 +1,19 @@
 # Cloudflared
 
-Includes both a local and a remote tunnel deployment.
+Deploys `cloudflared` agent, connected to a Remotely Managed Cloudflare tunnel, configured via Terraform (See [terraform script](../../terraform/tunnels.tf) for more information).
 
-## Remotely-Managed Tunnel Deployment
+See Cloudflare Docs for Kubernetes Deployment of `cloudflared`: [Link](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/deployment-guides/kubernetes/#_top)
 
-Configured via token generated in Cloudflare Dashboard as per these docs: [Link](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/deployment-guides/kubernetes/#_top)
+## Obtaining Tunnel Token
 
-## Locally-Managed Tunnel Deployment
+As an alternative to obtaining the token from Cloudflare One, the token can be obtained from Terraform output.
 
-Configured as per docs:
+```bash
+# Navigate to terraform directory
+cd ../../terraform
 
-- [Create a Locally Managed Tunnel (Cloudflare Docs)](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/create-local-tunnel/#1-download-and-install-cloudflared)
-- [`named-tunnel-k8s` (Cloudflare Github)](https://github.com/cloudflare/argo-tunnel-examples/tree/master/named-tunnel-k8s)
+# Output raw token value
+terraform output -raw tunnel_token
+```
+
+After obtaining the token, replace the SOPS-encrypted secret [here](terraform-tunnel-token-secret.enc.yaml) as described by the [README](../../README.md#encrypting-secrets), and commit the changes.
