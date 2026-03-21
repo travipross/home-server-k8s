@@ -1,10 +1,10 @@
 import {
   to = cloudflare_zero_trust_access_application.travisprosser_ca_wildcard
-  id = "accounts/${var.account_id}/d2dfb8c0-b242-4a3e-963f-f40efe11b7d3"
+  id = "accounts/${var.cf_account_id}/d2dfb8c0-b242-4a3e-963f-f40efe11b7d3"
 }
 
 resource "cloudflare_zero_trust_access_application" "travisprosser_ca_wildcard" {
-  account_id                 = var.account_id
+  account_id                 = var.cf_account_id
   allowed_idps               = []
   app_launcher_visible       = true
   auto_redirect_to_identity  = false
