@@ -1,6 +1,22 @@
+variable "domain" {
+  description = "Domain name"
+  type        = string
+  default     = "travisprosser.ca"
+}
+
+variable "tunnel_id" {
+  description = "ID of the Cloudflare Tunnel for the given domain"
+  type        = string
+  default     = "b073626e-a418-40b0-ade3-3a711b102204"
+}
+
+variable "zone_id" {
+  description = "Cloudflare Zone ID"
+  type        = string
+  sensitive   = true
+}
+
 locals {
-
-
   raw_apps = {
     "Strava" = {
       subdomain = "strava"

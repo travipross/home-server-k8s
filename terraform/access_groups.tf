@@ -80,11 +80,11 @@ resource "cloudflare_zero_trust_access_group" "travis_and_emma" {
   exclude    = []
   include = [{
     group = {
-      id = "7091e53f-4bda-4c0d-94d1-0dd80aea5689"
+      id = cloudflare_zero_trust_access_group.emma.id
     }
     }, {
     group = {
-      id = "e1877b8e-31e3-45d5-bfc1-48201e1903f0"
+      id = cloudflare_zero_trust_access_group.travis.id
     }
   }]
   require = []

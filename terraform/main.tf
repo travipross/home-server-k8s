@@ -26,34 +26,8 @@ provider "cloudflare" {
   # CLOUDFLARE_API_TOKEN=<token>
 }
 
-
-
-variable "zone_id" {
-  description = "Cloudflare Zone ID"
-  type        = string
-  sensitive   = true
-}
-
 variable "account_id" {
   description = "Cloudflare Account ID"
   type        = string
   sensitive   = true
 }
-
-variable "domain" {
-  description = "Domain name"
-  type        = string
-  default     = "travisprosser.ca"
-}
-
-variable "tunnel_id" {
-  description = "ID of the Cloudflare Tunnel for the given domain"
-  type        = string
-  default     = "b073626e-a418-40b0-ade3-3a711b102204"
-}
-
-locals {
-  locally_managed_tunnel_address = "${var.tunnel_id}.cfargotunnel.com"
-}
-
-
