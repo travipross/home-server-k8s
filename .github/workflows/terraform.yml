@@ -83,9 +83,7 @@ jobs:
             ${process.env.PLAN}
             \`\`\`
 
-            </details>
-
-            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Workflow: \`${{ github.workflow }}\`*`;
+            </details>`;
 
 
             // Add output to summary
