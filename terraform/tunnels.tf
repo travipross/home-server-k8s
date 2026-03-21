@@ -1,22 +1,5 @@
-variable "domain" {
-  description = "Domain name"
-  type        = string
-  default     = "travisprosser.ca"
-}
-
-variable "tunnel_id" {
-  description = "ID of the Cloudflare Tunnel for the given domain"
-  type        = string
-  default     = "b073626e-a418-40b0-ade3-3a711b102204"
-}
-
-variable "zone_id" {
-  description = "Cloudflare Zone ID"
-  type        = string
-  sensitive   = true
-}
-
 locals {
+  travisprosser_ca_domain = "travisprosser.ca"
   raw_apps = {
     "Strava" = {
       subdomain = "strava"
@@ -50,11 +33,11 @@ locals {
 // Tunnel
 import {
   to = cloudflare_zero_trust_tunnel_cloudflared.home_server_k3s
-  id = "${var.account_id}/8f73c5f2-4142-405a-91c6-58892f43ed92"
+  id = "${var.cf_account_id}/8f73c5f2-4142-405a-91c6-58892f43ed92"
 }
 
 resource "cloudflare_zero_trust_tunnel_cloudflared" "home_server_k3s" {
-  account_id = var.account_id
+  account_id = var.cf_account_id
   config_src = "cloudflare"
   name       = "home-server-k3s"
 }
@@ -63,24 +46,25 @@ resource "cloudflare_zero_trust_tunnel_cloudflared" "home_server_k3s" {
 // DNS CNAME records for each app
 resource "cloudflare_dns_record" "apps" {
   for_each = local.apps
-  zone_id  = var.zone_id
-  name     = each.value.subdomain
-  content  = "${cloudflare_zero_trust_tunnel_cloudflared.home_server_k3s.id}.cfargotunnel.com"
-  type     = "CNAME"
-  ttl      = 1
-  proxied  = true
-  comment  = "${each.key} tunnel - managed by Terraform"
+
+  zone_id = var.travisprosser_ca_zone_id
+  name    = each.value.subdomain
+  content = "${cloudflare_zero_trust_tunnel_cloudflared.home_server_k3s.id}.cfargotunnel.com"
+  type    = "CNAME"
+  ttl     = 1
+  proxied = true
+  comment = "${each.key} tunnel - managed by Terraform"
 }
 
 // Remotely-managed tunnel config
 resource "cloudflare_zero_trust_tunnel_cloudflared_config" "home_server_k3s" {
-  account_id = var.account_id
+  account_id = var.cf_account_id
   tunnel_id  = cloudflare_zero_trust_tunnel_cloudflared.home_server_k3s.id
   config = {
     ingress = concat(
       [
         for name, app in local.apps : {
-          hostname = "${app.subdomain}.${var.domain}"
+          hostname = "${app.subdomain}.${local.travisprosser_ca_domain}"
           service  = app.service
         }
       ],
@@ -95,15 +79,15 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "home_server_k3s" {
 
 // Cloudflare Access Applications
 resource "cloudflare_zero_trust_access_application" "apps" {
-  for_each   = local.apps
+  for_each = local.apps
+
   name       = each.key
-  account_id = var.account_id
+  account_id = var.cf_account_id
   type       = "self_hosted"
   destinations = [{
     type = "public"
-    uri  = "${each.value.subdomain}.${var.domain}"
+    uri  = "${each.value.subdomain}.${local.travisprosser_ca_domain}"
   }]
-
   policies = each.value.policy_id == null ? null : [{
     id = each.value.policy_id
   }]

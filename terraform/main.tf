@@ -26,8 +26,14 @@ provider "cloudflare" {
   # CLOUDFLARE_API_TOKEN=<token>
 }
 
-variable "account_id" {
+variable "cf_account_id" {
   description = "Cloudflare Account ID"
+  type        = string
+  sensitive   = true
+}
+
+variable "travisprosser_ca_zone_id" {
+  description = "Cloudflare Zone ID for travisprosser.ca"
   type        = string
   sensitive   = true
 }
