@@ -11,7 +11,7 @@ resource "cloudflare_zero_trust_access_application" "travisprosser_ca_wildcard" 
   domain                     = "*.travisprosser.ca"
   enable_binding_cookie      = false
   http_only_cookie_attribute = false
-  name                       = "home-server-k3s"
+  name                       = "Catch-all travisprosser.ca"
   options_preflight_bypass   = false
   session_duration           = "24h"
   tags                       = []
@@ -22,8 +22,7 @@ resource "cloudflare_zero_trust_access_application" "travisprosser_ca_wildcard" 
   }]
   policies = [
     {
-      id         = cloudflare_zero_trust_access_policy.travis_only.id
-      precedence = 10000
+      id = cloudflare_zero_trust_access_policy.travis_only.id
     }
   ]
 }
