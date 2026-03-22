@@ -1,6 +1,6 @@
 image:
   repository: ghcr.io/blakeblackshear/frigate
-  tag: 0.16.4
+  tag: 0.17.1
   pullPolicy: IfNotPresent
 strategyType: Recreate
 
