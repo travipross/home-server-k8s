@@ -26,14 +26,11 @@ provider "cloudflare" {
   # CLOUDFLARE_API_TOKEN=<token>
 }
 
-variable "cf_account_id" {
-  description = "Cloudflare Account ID"
-  type        = string
-  sensitive   = true
-}
 
-variable "travisprosser_ca_zone_id" {
-  description = "Cloudflare Zone ID for travisprosser.ca"
-  type        = string
-  sensitive   = true
+module "cloudflare" {
+  source                     = "./modules/cloudflare"
+  google_oauth_client_id     = var.google_oauth_client_id
+  google_oauth_client_secret = var.google_oauth_client_secret
+  account_id                 = var.cf_account_id
+  zone_id                    = var.cf_zone_id
 }

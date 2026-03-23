@@ -1,5 +1,5 @@
 resource "cloudflare_zero_trust_access_group" "travis" {
-  account_id = var.cf_account_id
+  account_id = var.account_id
   is_default = true
   name       = "Travis"
   exclude    = []
@@ -16,7 +16,7 @@ resource "cloudflare_zero_trust_access_group" "travis" {
 }
 
 resource "cloudflare_zero_trust_access_group" "faris" {
-  account_id = var.cf_account_id
+  account_id = var.account_id
   name       = "Faris"
   exclude    = []
   include = [{
@@ -36,7 +36,7 @@ resource "cloudflare_zero_trust_access_group" "faris" {
 }
 
 resource "cloudflare_zero_trust_access_group" "emma" {
-  account_id = var.cf_account_id
+  account_id = var.account_id
   name       = "Emma"
   exclude    = []
   include = [{
@@ -52,7 +52,7 @@ resource "cloudflare_zero_trust_access_group" "emma" {
 }
 
 resource "cloudflare_zero_trust_access_group" "travis_and_emma" {
-  account_id = var.cf_account_id
+  account_id = var.account_id
   name       = "Travis and Emma"
   exclude    = []
   include = [{

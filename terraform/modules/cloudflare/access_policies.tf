@@ -1,5 +1,5 @@
 resource "cloudflare_zero_trust_access_policy" "faris_with_justification" {
-  account_id                     = var.cf_account_id
+  account_id                     = var.account_id
   approval_required              = true
   decision                       = "allow"
   name                           = "Faris with Justification"
@@ -20,7 +20,7 @@ resource "cloudflare_zero_trust_access_policy" "faris_with_justification" {
 }
 
 resource "cloudflare_zero_trust_access_policy" "travis_only" {
-  account_id       = var.cf_account_id
+  account_id       = var.account_id
   decision         = "allow"
   name             = "Travis Only"
   session_duration = "24h"
@@ -34,7 +34,7 @@ resource "cloudflare_zero_trust_access_policy" "travis_only" {
 }
 
 resource "cloudflare_zero_trust_access_policy" "travis_and_emma" {
-  account_id       = var.cf_account_id
+  account_id       = var.account_id
   decision         = "allow"
   name             = "Travis and Emma"
   session_duration = "24h"
