@@ -1,7 +1,7 @@
 image:
   registry: docker.io
   repository: traefik
-  tag: v3.6.11
+  tag: v3.6.12
 providers:
   kubernetesGateway:
     enabled: true
