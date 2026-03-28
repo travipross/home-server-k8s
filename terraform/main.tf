@@ -2,7 +2,7 @@ terraform {
   required_providers {
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "~> 5"
+      version = "5.18.0"
     }
   }
 
@@ -26,11 +26,11 @@ provider "cloudflare" {
   # CLOUDFLARE_API_TOKEN=<token>
 }
 
-
-module "cloudflare" {
-  source                     = "./modules/cloudflare"
+module "cloudflare_tunnel" {
+  source                     = "./modules/cloudflare_tunnel"
   google_oauth_client_id     = var.google_oauth_client_id
   google_oauth_client_secret = var.google_oauth_client_secret
   account_id                 = var.cf_account_id
   zone_id                    = var.cf_zone_id
 }
+
