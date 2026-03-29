@@ -4,6 +4,10 @@ terraform {
       source  = "cloudflare/cloudflare"
       version = "5.18.0"
     }
+    oci = {
+      source  = "oracle/oci"
+      version = "8.5.0"
+    }
   }
 
   backend "s3" {
@@ -26,6 +30,14 @@ provider "cloudflare" {
   # CLOUDFLARE_API_TOKEN=<token>
 }
 
+provider "oci" {
+  # OCI_FINGERPRINT=<...>
+  # OCI_PRIVATE_KEY_PATH=<...>
+  # OCI_REGION=<...>
+  # OCI_TENANCY_OCID=<...>
+  # OCI_USER_OCID=<...>
+}
+
 module "cloudflare_tunnel" {
   source                     = "./modules/cloudflare_tunnel"
   google_oauth_client_id     = var.google_oauth_client_id
@@ -34,3 +46,14 @@ module "cloudflare_tunnel" {
   zone_id                    = var.cf_zone_id
 }
 
+module "oci_gateway_proxy" {
+  source                  = "./modules/oci_gateway_proxy"
+  compartment_id          = var.oci_tenancy_ocid
+  instance_ssh_public_key = var.oci_instance_ssh_public_key
+}
+
+
+import {
+  to = module.oci_gateway_proxy.oci_core_instance.gateway_node
+  id = "ocid1.instance.oc1.ca-montreal-1.an4xkljr5mpa37qcm24tmy6wem6jj6tehojmw6wj4li7jrwvnceah2lqrrtq"
+}

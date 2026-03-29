@@ -25,14 +25,26 @@ jobs:
       pull-requests: write
 
     env:
+      # Terraform Storage Backend
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_ENDPOINT_URL_S3: ${{ secrets.AWS_ENDPOINT_URL_S3 }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      
+      # Cloudflare Terraform provider
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      TF_VAR_cf_zone_id: ${{ secrets.TF_VAR_zone_id }}
+      TF_VAR_cf_zone_id: ${{ secrets.CLOUDFLARE_ZONE_ID_TRAVISPROSSER_CA }}
       TF_VAR_cf_account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       TF_VAR_google_oauth_client_id: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
       TF_VAR_google_oauth_client_secret: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+      
+      # Oracle Cloud Terraform provider
+      OCI_FINGERPRINT: ${{ secrets.OCI_FINGERPRINT }}
+      OCI_PRIVATE_KEY: ${{ secrets.OCI_PRIVATE_KEY }}
+      OCI_REGION: ${{ secrets.OCI_REGION }}
+      OCI_TENANCY_OCID: ${{ secrets.OCI_TENANCY_OCID }}
+      OCI_USER_OCID: ${{ secrets.OCI_USER_OCID }}
+      TF_VAR_oci_tenancy_ocid: ${{ secrets.OCI_TENANCY_OCID }}
+      TF_VAR_oci_instance_ssh_public_key: ${{ secrets.OCI_INSTANCE_SSH_PUBLIC_KEY }}
 
     steps:
       - uses: actions/checkout@v6
